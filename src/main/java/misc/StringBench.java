@@ -19,7 +19,7 @@ import java.util.stream.IntStream;
 @Warmup(iterations = 3)
 @Measurement(iterations = 5)
 
-/**
+/*
  * Benchmark                     (N)  Mode  Cnt     Score     Error  Units
  * StringBench.stringBuffer   100000  avgt    5     1.232 ±   0.030  ms/op
  * StringBench.stringBuilder  100000  avgt    5     0.950 ±   0.048  ms/op
