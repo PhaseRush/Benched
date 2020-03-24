@@ -15,6 +15,14 @@ import java.util.concurrent.TimeUnit;
 @Fork(value = 2, jvmArgs = {"-Xms2G", "-Xmx2G"})
 @Warmup(iterations = 3)
 @Measurement(iterations = 5)
+
+/**
+ * Benchmark                     (N)  Mode  Cnt     Score     Error  Units
+ * StringBench.stringBuffer   100000  avgt    5     1.232 ±   0.030  ms/op
+ * StringBench.stringBuilder  100000  avgt    5     0.950 ±   0.048  ms/op
+ * StringBench.stringConcat   100000  avgt    5  8616.315 ± 235.166  ms/op
+ * StringBench.stringRepeat   100000  avgt    5     0.163 ±   0.004  ms/op
+ */
 public class StringBench {
 
     @Param({"100000"})
