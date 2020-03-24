@@ -1,5 +1,7 @@
 package misc;
 
+import com.google.common.primitives.Ints;
+import joptsimple.internal.Strings;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
 import org.openjdk.jmh.runner.Runner;
@@ -8,6 +10,7 @@ import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
 
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
@@ -22,6 +25,7 @@ import java.util.concurrent.TimeUnit;
  * StringBench.stringBuilder  100000  avgt    5     0.950 ±   0.048  ms/op
  * StringBench.stringConcat   100000  avgt    5  8616.315 ± 235.166  ms/op
  * StringBench.stringRepeat   100000  avgt    5     0.163 ±   0.004  ms/op
+ * StringBench.streamReduce   100000  avgt    5  6599.168 ± 249.764  ms/op
  */
 public class StringBench {
 
@@ -75,5 +79,10 @@ public class StringBench {
     @Benchmark
     public void stringRepeat(Blackhole bh) {
         bh.consume(unit.repeat(N));
+    }
+
+    @Benchmark
+    public void streamReduce(Blackhole bh) {
+        bh.consume(IntStream.range(0, N).mapToObj(i -> unit).reduce(String::concat));
     }
 }
