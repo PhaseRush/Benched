@@ -11,9 +11,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.MILLISECONDS)
+@OutputTimeUnit(TimeUnit.NANOSECONDS)
 @State(Scope.Benchmark)
-@Fork(value = 2, jvmArgs = {"-Xms2G", "-Xmx2G"})
+@Fork(value = 2, jvmArgs = {"-Xms6G", "-Xmx6G"})
 @Warmup(iterations = 3)
 @Measurement(iterations = 5)
 
