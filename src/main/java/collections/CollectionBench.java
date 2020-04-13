@@ -18,6 +18,26 @@ import java.util.stream.IntStream;
 @Fork(value = 2, jvmArgs = {"-Xms2G", "-Xmx2G"})
 @Warmup(iterations = 3)
 @Measurement(iterations = 5)
+
+/*
+Benchmark                                            (N)  Mode  Cnt  Score   Error  Units
+CollectionBench.array_iteratorUsingGuava         1000000  avgt    5  7.187 ± 0.325  ms/op
+CollectionBench.array_listFor                    1000000  avgt    5  3.657 ± 0.079  ms/op
+CollectionBench.array_loopWhile                  1000000  avgt    5  3.637 ± 0.102  ms/op
+CollectionBench.array_replace                    1000000  avgt    5  0.046 ± 0.004  ms/op
+CollectionBench.list_iterator                    1000000  avgt    5  4.431 ± 0.130  ms/op
+CollectionBench.list_loopFor                     1000000  avgt    5  4.557 ± 0.404  ms/op
+CollectionBench.list_loopWhile                   1000000  avgt    5  4.288 ± 0.286  ms/op
+CollectionBench.list_replace                     1000000  avgt    5  5.124 ± 0.249  ms/op
+CollectionBench.sum_even_loop_array              1000000  avgt    5  0.491 ± 0.008  ms/op
+CollectionBench.sum_even_loop_list               1000000  avgt    5  1.042 ± 0.236  ms/op
+CollectionBench.sum_even_stream_array            1000000  avgt    5  3.010 ± 0.229  ms/op
+CollectionBench.sum_even_stream_array_primitive  1000000  avgt    5  4.025 ± 0.089  ms/op
+CollectionBench.sum_even_stream_list             1000000  avgt    5  5.314 ± 1.279  ms/op
+
+Process finished with exit code 0
+
+ */
 public class CollectionBench {
 
     @Param({"1000000"})
