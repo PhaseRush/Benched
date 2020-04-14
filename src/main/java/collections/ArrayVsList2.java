@@ -33,7 +33,7 @@ CollectionBench.sum_even_loop_list      25  avgt    5       169.395 ±      6.05
 CollectionBench.sum_even_stream_array   25  avgt    5  11645976.896 ± 308528.549  ns/op
 CollectionBench.sum_even_stream_list    25  avgt    5  11900203.804 ± 689803.392  ns/op
  */
-public class CollectionBench2 {
+public class ArrayVsList2 {
     @Param({"25"})
     private int N;
 
@@ -43,7 +43,7 @@ public class CollectionBench2 {
     public static void main(String[] args) throws RunnerException {
 
         Options opt = new OptionsBuilder()
-                .include(CollectionBench2.class.getSimpleName())
+                .include(ArrayVsList2.class.getSimpleName())
                 .forks(1)
                 .build();
 
