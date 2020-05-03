@@ -33,6 +33,7 @@ public class EqualityBench {
     String sCopyRef;
     String sCopyVal;
     String sDiffVal;
+    String sNull;
 
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
@@ -51,36 +52,43 @@ public class EqualityBench {
         sCopyRef = s;
         sCopyVal = "https://stackoverflow.com/questions/7520432/what-is-the-difference-between-and-equals-in-java";
         sDiffVal = "x";
+
+        sNull = null;
     }
 
-    @Benchmark
-    public void primitiveDouble(Blackhole bh) {
-        bh.consume(d == 0.1);
-    }
+//    @Benchmark
+//    public void primitiveDouble(Blackhole bh) {
+//        bh.consume(d == 0.1);
+//    }
+//
+//    @Benchmark
+//    public void primitiveBoolean(Blackhole bh) {
+//        bh.consume(b);
+//    }
+//
+//
+//    @Benchmark
+//    public void stringReferenceSame(Blackhole bh) {
+//        bh.consume(s == sCopyRef);
+//    }
+//
+//    @Benchmark
+//    public void stringReferenceDif(Blackhole bh) {
+//        bh.consume(s == sCopyVal);
+//    }
+//
+//    @Benchmark
+//    public void stringEqualsSame(Blackhole bh) {
+//        bh.consume(s.equals(sCopyVal));
+//    }
+//
+//    @Benchmark
+//    public void stringEqualsDif(Blackhole bh) {
+//        bh.consume(s.equals(sDiffVal));
+//    }
 
     @Benchmark
-    public void primitiveBoolean(Blackhole bh) {
-        bh.consume(b);
-    }
-
-
-    @Benchmark
-    public void stringReferenceSame(Blackhole bh) {
-        bh.consume(s == sCopyRef);
-    }
-
-    @Benchmark
-    public void stringReferenceDif(Blackhole bh) {
-        bh.consume(s == sCopyVal);
-    }
-
-    @Benchmark
-    public void stringEqualsSame(Blackhole bh) {
-        bh.consume(s.equals(sCopyVal));
-    }
-
-    @Benchmark
-    public void stringEqualsDif(Blackhole bh) {
-        bh.consume(s.equals(sDiffVal));
+    public void stringEqualsNull(Blackhole bh) {
+        bh.consume(sNull == null);
     }
 }
