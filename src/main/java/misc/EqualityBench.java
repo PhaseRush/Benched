@@ -19,9 +19,10 @@ import java.util.concurrent.TimeUnit;
 
 /*
 Benchmark                          Mode  Cnt  Score   Error  Units
+EqualityBench.stringEqualsDif      avgt    5  4.201 ± 0.148  ns/op
+
 EqualityBench.primitiveBoolean     avgt    5  3.708 ± 0.080  ns/op
 EqualityBench.primitiveDouble      avgt    5  3.959 ± 0.106  ns/op
-EqualityBench.stringEqualsDif      avgt    5  4.201 ± 0.148  ns/op
 EqualityBench.stringEqualsSame     avgt    5  3.904 ± 0.015  ns/op
 EqualityBench.stringReferenceDif   avgt    5  3.919 ± 0.082  ns/op
 EqualityBench.stringReferenceSame  avgt    5  3.915 ± 0.037  ns/op
