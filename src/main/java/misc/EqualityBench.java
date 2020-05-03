@@ -25,6 +25,7 @@ EqualityBench.stringEqualsDif      avgt    5  4.201 ± 0.148  ns/op
 EqualityBench.stringEqualsSame     avgt    5  3.904 ± 0.015  ns/op
 EqualityBench.stringReferenceDif   avgt    5  3.919 ± 0.082  ns/op
 EqualityBench.stringReferenceSame  avgt    5  3.915 ± 0.037  ns/op
+EqualityBench.stringEqualsNull     avgt    5  3.929 ± 0.100  ns/op
  */
 public class EqualityBench {
     double d;
@@ -56,36 +57,36 @@ public class EqualityBench {
         sNull = null;
     }
 
-//    @Benchmark
-//    public void primitiveDouble(Blackhole bh) {
-//        bh.consume(d == 0.1);
-//    }
-//
-//    @Benchmark
-//    public void primitiveBoolean(Blackhole bh) {
-//        bh.consume(b);
-//    }
-//
-//
-//    @Benchmark
-//    public void stringReferenceSame(Blackhole bh) {
-//        bh.consume(s == sCopyRef);
-//    }
-//
-//    @Benchmark
-//    public void stringReferenceDif(Blackhole bh) {
-//        bh.consume(s == sCopyVal);
-//    }
-//
-//    @Benchmark
-//    public void stringEqualsSame(Blackhole bh) {
-//        bh.consume(s.equals(sCopyVal));
-//    }
-//
-//    @Benchmark
-//    public void stringEqualsDif(Blackhole bh) {
-//        bh.consume(s.equals(sDiffVal));
-//    }
+    @Benchmark
+    public void primitiveDouble(Blackhole bh) {
+        bh.consume(d == 0.1);
+    }
+
+    @Benchmark
+    public void primitiveBoolean(Blackhole bh) {
+        bh.consume(b);
+    }
+
+
+    @Benchmark
+    public void stringReferenceSame(Blackhole bh) {
+        bh.consume(s == sCopyRef);
+    }
+
+    @Benchmark
+    public void stringReferenceDif(Blackhole bh) {
+        bh.consume(s == sCopyVal);
+    }
+
+    @Benchmark
+    public void stringEqualsSame(Blackhole bh) {
+        bh.consume(s.equals(sCopyVal));
+    }
+
+    @Benchmark
+    public void stringEqualsDif(Blackhole bh) {
+        bh.consume(s.equals(sDiffVal));
+    }
 
     @Benchmark
     public void stringEqualsNull(Blackhole bh) {
