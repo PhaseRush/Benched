@@ -19,6 +19,25 @@ import java.util.concurrent.TimeUnit;
 @Warmup(iterations = 3)
 @Measurement(iterations = 5)
 
+/*
+Benchmark                                  (M)     (N)  Mode  Cnt    Score     Error  Units
+CopyBench.longArr_ArrayCopy               1000  100000  avgt    5   90.333 ±  10.104  us/op
+CopyBench.longArr_manualLoop              1000  100000  avgt    5  106.062 ±  20.149  us/op
+CopyBench.longArr_systemCopy              1000  100000  avgt    5   86.366 ±  15.975  us/op
+
+CopyBench.stringArr_ArrayCopy             1000  100000  avgt    5   47.914 ±   3.322  us/op
+CopyBench.stringArr_manualLoop            1000  100000  avgt    5  259.927 ±  11.039  us/op
+CopyBench.stringArr_systemCopy            1000  100000  avgt    5   47.238 ±   7.764  us/op
+
+
+CopyBench.longList_collectionsAddAll      1000  100000  avgt    5   97.126 ±  16.804  us/op
+CopyBench.longList_manualLoop_readArr     1000  100000  avgt    5  539.672 ± 286.184  us/op
+CopyBench.longList_manualLoop_readList    1000  100000  avgt    5  438.274 ± 441.266  us/op
+
+CopyBench.stringList_collectionsAddAll    1000  100000  avgt    5   97.375 ±   8.741  us/op
+CopyBench.stringList_manualLoop_readArr   1000  100000  avgt    5  353.275 ± 332.581  us/op
+CopyBench.stringList_manualLoop_readList  1000  100000  avgt    5  467.962 ± 418.989  us/op
+*/
 public class CopyBench {
 
     @Param({"100000"})
