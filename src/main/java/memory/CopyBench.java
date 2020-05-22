@@ -14,29 +14,25 @@ import java.util.concurrent.TimeUnit;
 
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
-@State(Scope.Benchmark)
+@State(Scope.Thread)
 @Fork(value = 2, jvmArgs = {"-Xms2G", "-Xmx2G"})
-@Warmup(iterations = 3)
-@Measurement(iterations = 5)
+@Warmup(iterations = 7)
+@Measurement(iterations = 10)
 
 /*
-Benchmark                                  (M)     (N)  Mode  Cnt    Score     Error  Units
-CopyBench.longArr_ArrayCopy               1000  100000  avgt    5   90.333 ±  10.104  us/op
-CopyBench.longArr_manualLoop              1000  100000  avgt    5  106.062 ±  20.149  us/op
-CopyBench.longArr_systemCopy              1000  100000  avgt    5   86.366 ±  15.975  us/op
-
-CopyBench.stringArr_ArrayCopy             1000  100000  avgt    5   47.914 ±   3.322  us/op
-CopyBench.stringArr_manualLoop            1000  100000  avgt    5  259.927 ±  11.039  us/op
-CopyBench.stringArr_systemCopy            1000  100000  avgt    5   47.238 ±   7.764  us/op
-
-
-CopyBench.longList_collectionsAddAll      1000  100000  avgt    5   97.126 ±  16.804  us/op
-CopyBench.longList_manualLoop_readArr     1000  100000  avgt    5  539.672 ± 286.184  us/op
-CopyBench.longList_manualLoop_readList    1000  100000  avgt    5  438.274 ± 441.266  us/op
-
-CopyBench.stringList_collectionsAddAll    1000  100000  avgt    5   97.375 ±   8.741  us/op
-CopyBench.stringList_manualLoop_readArr   1000  100000  avgt    5  353.275 ± 332.581  us/op
-CopyBench.stringList_manualLoop_readList  1000  100000  avgt    5  467.962 ± 418.989  us/op
+Benchmark                                  (M)     (N)  Mode  Cnt    Score    Error  Units
+CopyBench.longArr_ArrayCopy               1000  100000  avgt   10   81.999 ±  4.160  us/op
+CopyBench.longArr_manualLoop              1000  100000  avgt   10   98.962 ±  1.935  us/op
+CopyBench.longArr_systemCopy              1000  100000  avgt   10   81.502 ±  3.826  us/op
+CopyBench.longList_collectionsAddAll      1000  100000  avgt   10   98.968 ± 14.912  us/op
+CopyBench.longList_manualLoop_readArr     1000  100000  avgt   10  444.886 ± 11.552  us/op
+CopyBench.longList_manualLoop_readList    1000  100000  avgt   10  333.028 ±  4.297  us/op
+CopyBench.stringArr_ArrayCopy             1000  100000  avgt   10   47.090 ±  2.448  us/op
+CopyBench.stringArr_manualLoop            1000  100000  avgt   10  264.560 ±  2.794  us/op
+CopyBench.stringArr_systemCopy            1000  100000  avgt   10   44.271 ±  1.123  us/op
+CopyBench.stringList_collectionsAddAll    1000  100000  avgt   10   91.303 ±  3.850  us/op
+CopyBench.stringList_manualLoop_readArr   1000  100000  avgt   10  294.379 ±  3.911  us/op
+CopyBench.stringList_manualLoop_readList  1000  100000  avgt   10  356.284 ±  9.572  us/op
 */
 public class CopyBench {
 
@@ -157,6 +153,7 @@ public class CopyBench {
         bh.consume(bait);
     }
 
+    //    @BenchmarkMode(Mode.SingleShotTime)
     @Benchmark
     public void stringList_manualLoop_readList(Blackhole bh) {
         List<String> bait = new ArrayList<>(N);
