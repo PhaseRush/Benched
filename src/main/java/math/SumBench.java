@@ -7,18 +7,20 @@ import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 import java.util.concurrent.TimeUnit;
+import java.util.stream.LongStream;
 
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.NANOSECONDS)
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
 @State(Scope.Benchmark)
 @Fork(value = 2, jvmArgs = {"-Xms6G", "-Xmx6G"})
 @Warmup(iterations = 3)
 @Measurement(iterations = 5)
 
 /*
-Benchmark            (N)  Mode  Cnt         Score         Error  Units
-SumBench.loop  100000000  avgt    5  85298368.172 ± 4264987.725  ns/op
-SumBench.math  100000000  avgt    5         4.153 ±       0.083  ns/op
+Benchmark                    (N)  Mode  Cnt      Score      Error  Units
+SumBench.loop          100000000  avgt    5  85552.456 ± 3191.902  us/op
+SumBench.math          100000000  avgt    5      0.004 ±    0.001  us/op
+SumBench.streamReduce  100000000  avgt    5  45508.830 ± 1680.532  us/op
  */
 public class SumBench {
     @Param({"100000000"})
@@ -44,5 +46,11 @@ public class SumBench {
             count += i;
         }
         bh.consume(count);
+    }
+
+    @Benchmark
+    public void streamReduce(Blackhole bh) {
+        bh.consume(LongStream.range(0, N)
+                .reduce(0, Long::sum));
     }
 }
