@@ -16,9 +16,9 @@ import java.util.concurrent.TimeUnit;
 @Measurement(iterations = 5)
 
 /*
-Benchmark            (N)  Mode  Cnt      Score       Error  Units
-SumBench.loop  100000000  avgt    5  86000.413 ± 19418.827  us/op
-SumBench.math  100000000  avgt    5      0.004 ±     0.001  us/op
+Benchmark            (N)  Mode  Cnt         Score         Error  Units
+SumBench.loop  100000000  avgt    5  85298368.172 ± 4264987.725  ns/op
+SumBench.math  100000000  avgt    5         4.153 ±       0.083  ns/op
  */
 public class SumBench {
     @Param({"100000000"})
