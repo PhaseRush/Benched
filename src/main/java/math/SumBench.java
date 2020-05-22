@@ -17,10 +17,11 @@ import java.util.stream.LongStream;
 @Measurement(iterations = 5)
 
 /*
-Benchmark                    (N)  Mode  Cnt      Score      Error  Units
-SumBench.loop          100000000  avgt    5  85552.456 ± 3191.902  us/op
-SumBench.math          100000000  avgt    5      0.004 ±    0.001  us/op
-SumBench.streamReduce  100000000  avgt    5  45508.830 ± 1680.532  us/op
+Benchmark                            (N)  Mode  Cnt      Score      Error  Units
+SumBench.loop                  100000000  avgt    5  81762.164 ± 7245.730  us/op
+SumBench.math                  100000000  avgt    5      0.004 ±    0.001  us/op
+SumBench.parallelStreamReduce  100000000  avgt    5  67860.255 ± 2188.650  us/op
+SumBench.streamReduce          100000000  avgt    5  44787.744 ± 2993.240  us/op
  */
 public class SumBench {
     @Param({"100000000"})
@@ -51,6 +52,13 @@ public class SumBench {
     @Benchmark
     public void streamReduce(Blackhole bh) {
         bh.consume(LongStream.range(0, N)
+                .reduce(0, Long::sum));
+    }
+
+    @Benchmark
+    public void parallelStreamReduce(Blackhole bh) {
+        bh.consume(LongStream.range(0, N)
+                .parallel()
                 .reduce(0, Long::sum));
     }
 }
