@@ -32,7 +32,7 @@ CopyBench.longList_manualLoop_readList    1000  100000  avgt   10  333.028 ±  4
 CopyBench.stringArr_ArrayCopy             1000  100000  avgt   10   47.090 ±  2.448  us/op
 CopyBench.stringArr_manualLoop            1000  100000  avgt   10  264.560 ±  2.794  us/op
 CopyBench.stringArr_manualLoop_unroll4    1000  100000  avgt   10  217.798 ±  5.648  us/op
-CopyBench.stringArr_manualLoop_unroll8    1000  100000  avgt   10  207.649 ± 10.539  us/op
+CopyBench.stringArr_manualLoop_unroll8    1000  100000  avgt   10  186.069 ±  0.601  us/op
 CopyBench.stringArr_systemCopy            1000  100000  avgt   10   44.271 ±  1.123  us/op
 
 CopyBench.stringList_collectionsAddAll    1000  100000  avgt   10   91.303 ±  3.850  us/op
@@ -79,76 +79,79 @@ public class CopyBench {
         }
     }
 
-//    @Benchmark
-//    public void longArr_systemCopy(Blackhole bh) {
-//        long[] bait = new long[N];
-//        System.arraycopy(longArr, 0, bait, 0, N);
-//        bh.consume(bait);
-//    }
-//
-//    @Benchmark
-//    public void longArr_ArrayCopy(Blackhole bh) {
-//        bh.consume(Arrays.copyOf(longArr, N));
-//    }
-//
-//    // Intellij suggests to use System.arraycopy()
-//    @Benchmark
-//    public void longArr_manualLoop(Blackhole bh) {
-//        long[] bait = new long[N];
-//        for (int i = 0; i < N; i++) {
-//            bait[i] = longArr[i];
-//        }
-//        bh.consume(bait);
-//    }
-//
-//    @Benchmark
-//    public void longList_manualLoop_readArr(Blackhole bh) {
-//        List<Long> bait = new ArrayList<>(N);
-//        for (int i = 0; i < N; i++) {
-//            bait.add(longArr[i]);
-//        }
-//        bh.consume(bait);
-//    }
-//
-//    @Benchmark
-//    public void longList_manualLoop_readList(Blackhole bh) {
-//        List<Long> bait = new ArrayList<>(N);
-//        for (int i = 0; i < N; i++) {
-//            bait.add(longList.get(i));
-//        }
-//        bh.consume(bait);
-//    }
-//
-//    @Benchmark
-//    public void longList_collectionsAddAll(Blackhole bh) {
-//        List<Long> bait = new ArrayList<>(N);
-//        bait.addAll(longList);
-//        bh.consume(bait);
-//    }
-//
-//    @Benchmark
-//    public void stringArr_systemCopy(Blackhole bh) {
-//        String[] bait = new String[N];
-//        System.arraycopy(stringArr, 0, bait, 0, N);
-//        bh.consume(bait);
-//    }
-//
-//    @Benchmark
-//    public void stringArr_ArrayCopy(Blackhole bh) {
-//        bh.consume(Arrays.copyOf(stringArr, N));
-//    }
-
-    // Intellij suggests to use System.arraycopy()
-//    @Benchmark
-//    public void stringArr_manualLoop(Blackhole bh) {
-//        String[] bait = new String[N];
-//        for (int i = 0; i < N; i++) {
-//            bait[i] = stringArr[i];
-//        }
-//        bh.consume(bait);
-//    }
+    @Benchmark
+    public void longArr_systemCopy(Blackhole bh) {
+        long[] bait = new long[N];
+        System.arraycopy(longArr, 0, bait, 0, N);
+        bh.consume(bait);
+    }
 
     @Benchmark
+    public void longArr_ArrayCopy(Blackhole bh) {
+        bh.consume(Arrays.copyOf(longArr, N));
+    }
+
+    // Intellij suggests to use System.arraycopy()
+    @Benchmark
+    public void longArr_manualLoop(Blackhole bh) {
+        long[] bait = new long[N];
+        for (int i = 0; i < N; i++) {
+            bait[i] = longArr[i];
+        }
+        bh.consume(bait);
+    }
+
+    @Benchmark
+    public void longList_manualLoop_readArr(Blackhole bh) {
+        List<Long> bait = new ArrayList<>(N);
+        for (int i = 0; i < N; i++) {
+            bait.add(longArr[i]);
+        }
+        bh.consume(bait);
+    }
+
+    @Benchmark
+    public void longList_manualLoop_readList(Blackhole bh) {
+        List<Long> bait = new ArrayList<>(N);
+        for (int i = 0; i < N; i++) {
+            bait.add(longList.get(i));
+        }
+        bh.consume(bait);
+    }
+
+    @Benchmark
+    public void longList_collectionsAddAll(Blackhole bh) {
+        List<Long> bait = new ArrayList<>(N);
+        bait.addAll(longList);
+        bh.consume(bait);
+    }
+
+    @Benchmark
+    public void stringArr_systemCopy(Blackhole bh) {
+        String[] bait = new String[N];
+        System.arraycopy(stringArr, 0, bait, 0, N);
+        bh.consume(bait);
+    }
+
+    @Benchmark
+    public void stringArr_ArrayCopy(Blackhole bh) {
+        bh.consume(Arrays.copyOf(stringArr, N));
+    }
+
+//    Intellij suggests to use System.arraycopy()
+    @Benchmark
+    public void stringArr_manualLoop(Blackhole bh) {
+        String[] bait = new String[N];
+        for (int i = 0; i < N; i++) {
+            bait[i] = stringArr[i];
+        }
+        bh.consume(bait);
+    }
+
+    @Benchmark
+    //-XX:+AggressiveOpts
+//    @Fork(jvmArgsAppend = "-XX:+UnlockDiagnosticVMOptions -XX:+UnlockExperimentalVMOptions -XX:+PrintFlagsFinal -version -XX:+PrintOptoAssembly")
+//    @Fork(jvmArgsAppend = {"-XX:+UnlockDiagnosticVMOptions", "-XX:CompileThreshold=10", "-XX:+PrintAssembly"})
     public void stringArr_manualLoop_unroll8(Blackhole bh) {
         String[] bait = new String[N];
         for (int i = 0; i < N; i += 8) {
@@ -164,31 +167,31 @@ public class CopyBench {
         bh.consume(bait);
     }
 
-//    // Intellij suggests Collections.addAll()
-//    @Benchmark
-//    public void stringList_manualLoop_readArr(Blackhole bh) {
-//        List<String> bait = new ArrayList<>(N);
-//        for (int i = 0; i < N; i++) {
-//            bait.add(stringArr[i]);
-//        }
-//        bh.consume(bait);
-//    }
-//
-//    //    @BenchmarkMode(Mode.SingleShotTime)
-//    @Benchmark
-//    public void stringList_manualLoop_readList(Blackhole bh) {
-//        List<String> bait = new ArrayList<>(N);
-//        for (int i = 0; i < N; i++) {
-//            bait.add(stringList.get(i));
-//        }
-//        bh.consume(bait);
-//    }
-//
-//    @Benchmark
-//    public void stringList_collectionsAddAll(Blackhole bh) {
-//        List<String> bait = new ArrayList<>(N);
-//        bait.addAll(stringList);
-//        bh.consume(bait);
-//    }
+    // Intellij suggests Collections.addAll()
+    @Benchmark
+    public void stringList_manualLoop_readArr(Blackhole bh) {
+        List<String> bait = new ArrayList<>(N);
+        for (int i = 0; i < N; i++) {
+            bait.add(stringArr[i]);
+        }
+        bh.consume(bait);
+    }
+
+    //    @BenchmarkMode(Mode.SingleShotTime)
+    @Benchmark
+    public void stringList_manualLoop_readList(Blackhole bh) {
+        List<String> bait = new ArrayList<>(N);
+        for (int i = 0; i < N; i++) {
+            bait.add(stringList.get(i));
+        }
+        bh.consume(bait);
+    }
+
+    @Benchmark
+    public void stringList_collectionsAddAll(Blackhole bh) {
+        List<String> bait = new ArrayList<>(N);
+        bait.addAll(stringList);
+        bh.consume(bait);
+    }
 
 }
