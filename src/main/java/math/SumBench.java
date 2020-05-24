@@ -24,6 +24,7 @@ SumBench.loop                  100000000  avgt    5  81762.164 ± 7245.730  us/o
 SumBench.math                  100000000  avgt    5      0.004 ±    0.001  us/op
 SumBench.parallelStreamReduce  100000000  avgt    5  67860.255 ± 2188.650  us/op
 SumBench.streamReduce          100000000  avgt    5  44787.744 ± 2993.240  us/op
+SumBench.loop_bigint           100000000  avgt    5     21.089 ±    0.716   s/op
  */
 public class SumBench {
     @Param({"1000000000"})
