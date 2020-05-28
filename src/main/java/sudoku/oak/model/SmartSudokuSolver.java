@@ -16,19 +16,22 @@ public class SmartSudokuSolver implements Solver {
     }
 
     @Override
-    public void solve() {
-        System.out.println(sudoku + "\n");
+    public boolean solve() {
+//        System.out.println(sudoku + "\n");
+        boolean b = false;
         while (noEndConditionReached()) {
             solveIteration();
+            b = !b;
             //System.out.println(sudoku + "\n");
         }
+        return b;
     }
 
     public void solveIteration() {
         if (!resolveCellsWithSoleCandidate()) {
             if (!resolveCellsWithUniqueCandidate()) {
                 Cell cellWithFewestCandidates = findCellWithFewestCandidates();
-                System.out.println("Cell with fewest candidates: " + cellWithFewestCandidates.getCandidates());
+//                System.out.println("Cell with fewest candidates: " + cellWithFewestCandidates.getCandidates());
                 if (cellWithFewestCandidates.getCandidates().isEmpty()) {
                     return;
                 }
