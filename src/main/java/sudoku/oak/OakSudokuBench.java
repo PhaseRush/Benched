@@ -1,4 +1,4 @@
-package sudoku;
+package sudoku.oak;
 
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
@@ -28,10 +28,13 @@ import java.util.stream.Collectors;
 /*
 Benchmark                        (N)  Mode  Cnt      Score   Error  Units
 OakSudokuBench.solveAll        10000  avgt       51952.877          ms/op
-OakSudokuBench.solveEmpty      10000  avgt          19.103          ms/op
-OakSudokuBench.solveExpert     10000  avgt           4.425          ms/op
-OakSudokuBench.solveSeventeen  10000  avgt           1.073          ms/op
-OakSudokuBench.solveSimple     10000  avgt           0.116          ms/op
+
+Benchmark                        (N)  Mode  Cnt   Score   Error  Units
+OakSudokuBench.solveEmpty      10000  avgt    5  15.514 ± 0.586  ms/op
+OakSudokuBench.solveExpert     10000  avgt    5   4.326 ± 0.895  ms/op
+OakSudokuBench.solveSeventeen  10000  avgt    5   1.000 ± 0.094  ms/op
+OakSudokuBench.solveSimple     10000  avgt    5   0.112 ± 0.016  ms/op
+OakSudokuBench.solveHardestFinland  10000  avgt    5  69.364 ± 4.999  ms/op
  */
 public class OakSudokuBench {
 
@@ -95,6 +98,18 @@ public class OakSudokuBench {
             0, 4, 0, 0, 0, 0, 3, 0, 0
     };
 
+    int[] hardestFinnishArray = {
+            8, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 3, 6, 0, 0, 0, 0, 0,
+            0, 7, 0, 0, 9, 0, 2, 0, 0,
+            0, 5, 0, 0, 0, 7, 0, 0, 0,
+            0, 0, 0, 0, 4, 5, 7, 0, 0,
+            0, 0, 0, 1, 0, 0, 0, 3, 0,
+            0, 0, 1, 0, 0, 0, 0, 6, 8,
+            0, 0, 8, 5, 0, 0, 0, 1, 0,
+            0, 9, 0, 0, 0, 0, 4, 0, 0
+    };
+
     @Setup
     public void setup() {
         try {
@@ -134,7 +149,15 @@ public class OakSudokuBench {
     }
 
     @Benchmark
+    public void solveHardestFinland(Blackhole bh) {
+        new SmartSudokuSolver(new ArraySudoku(hardestFinnishArray)).solve();
+    }
+    @Benchmark
     public void solveN(Blackhole bh) {
-        sudokus.forEach(s -> new SmartSudokuSolver(s).solve());
+        boolean b = true;
+        for (Sudoku s : sudokus) {
+            bh.consume(new SmartSudokuSolver(s).solve());
+        }
+        bh.consume(b);
     }
 }

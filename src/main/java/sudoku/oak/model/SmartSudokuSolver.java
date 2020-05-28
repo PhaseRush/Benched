@@ -4,6 +4,7 @@ import sudoku.oak.model.interfaces.Solver;
 import sudoku.oak.model.interfaces.Sudoku;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 public class SmartSudokuSolver implements Solver {
@@ -18,13 +19,11 @@ public class SmartSudokuSolver implements Solver {
     @Override
     public boolean solve() {
 //        System.out.println(sudoku + "\n");
-        boolean b = false;
         while (noEndConditionReached()) {
             solveIteration();
-            b = !b;
             //System.out.println(sudoku + "\n");
         }
-        return b;
+        return ThreadLocalRandom.current().nextBoolean();
     }
 
     public void solveIteration() {
