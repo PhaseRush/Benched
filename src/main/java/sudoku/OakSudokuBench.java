@@ -1,4 +1,4 @@
-package sudoku.oak;
+package sudoku;
 
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
@@ -6,7 +6,6 @@ import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
-import stream.StreamBench;
 import sudoku.oak.model.ArraySudoku;
 import sudoku.oak.model.SmartSudokuSolver;
 import sudoku.oak.model.interfaces.Sudoku;
@@ -19,14 +18,13 @@ import java.net.URL;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @State(Scope.Benchmark)
 @Fork(value = 2, jvmArgs = {"-Xms4G", "-Xmx4G"})
-@Warmup(iterations = 0)
-@Measurement(iterations = 1)
+@Warmup(iterations = 1)
+@Measurement(iterations = 5)
 /*
 Benchmark                        (N)  Mode  Cnt      Score   Error  Units
 OakSudokuBench.solveAll        10000  avgt       51952.877          ms/op
@@ -136,7 +134,7 @@ public class OakSudokuBench {
     }
 
     @Benchmark
-    public void solveAll(Blackhole bh) {
+    public void solveN(Blackhole bh) {
         sudokus.forEach(s -> new SmartSudokuSolver(s).solve());
     }
 }
