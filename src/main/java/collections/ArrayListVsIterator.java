@@ -22,6 +22,11 @@ import java.util.stream.IntStream;
 @Measurement(iterations = 5)
 
 /*
+Benchmark                              (N)  Mode  Cnt          Score          Error  Units
+ArrayListVsIterator.iter_create   10000000  avgt    5  134141593.553 ± 10605404.429  ns/op
+ArrayListVsIterator.iter_iterate  10000000  avgt    5          1.497 ±        0.036  ns/op
+ArrayListVsIterator.list_create   10000000  avgt    5  131382462.460 ± 21299333.608  ns/op
+ArrayListVsIterator.list_iterate  10000000  avgt    5   38868614.668 ±   676855.585  ns/op
  */
 public class ArrayListVsIterator {
 
@@ -60,22 +65,11 @@ public class ArrayListVsIterator {
 
     @Benchmark
     public void iter_create(Blackhole bh) {
-        Iterator<Integer> iter = new Iterator<>() {
-            int curr = 0;
-            int max = N;
-
-            @Override
-            public boolean hasNext() {
-                return curr < max;
-            }
-
-            @Override
-            public Integer next() {
-                curr++;
-                return curr - 1;
-            }
-        };
-        bh.consume(iter);
+        List<Integer> list = new ArrayList<>(N);
+        for (int i = 0; i < N; i++) {
+            list.add(i);
+        }
+        bh.consume(list.iterator());
     }
 
     @Benchmark
