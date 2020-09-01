@@ -18,6 +18,8 @@ import java.util.concurrent.TimeUnit;
 @Measurement(iterations = 5)
 
 /*
+Note: 10900K @ 5.2 GHz
+
 Benchmark                             Mode  Cnt    Score   Error  Units
 NumDigitsBench.double300Log           avgt    5    9.653 ± 0.053  ns/op
 NumDigitsBench.double300StringLength  avgt    5  875.764 ± 6.930  ns/op
