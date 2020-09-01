@@ -18,24 +18,22 @@ import java.util.concurrent.TimeUnit;
 @Measurement(iterations = 5)
 
 /*
-Benchmark                             Mode  Cnt    Score    Error  Units
-NumDigitsBench.double300Log           avgt    5   11.918 ±  0.404  ns/op
-NumDigitsBench.double300StringLength  avgt    5  874.786 ± 14.934  ns/op
+Benchmark                             Mode  Cnt    Score   Error  Units
+NumDigitsBench.double300Log           avgt    5    9.653 ± 0.053  ns/op
+NumDigitsBench.double300StringLength  avgt    5  875.764 ± 6.930  ns/op
 
-NumDigitsBench.double5Log             avgt    5   11.845 ±  0.337  ns/op
-NumDigitsBench.double5StringLength    avgt    5  108.378 ±  6.811  ns/op
+NumDigitsBench.double5Log             avgt    5    9.648 ± 0.029  ns/op
+NumDigitsBench.double5StringLength    avgt    5  166.737 ± 4.017  ns/op
 
-NumDigitsBench.int5IfNest             avgt    5    3.920 ±  0.046  ns/op
-NumDigitsBench.int5Log                avgt    5   12.145 ±  0.206  ns/op
-NumDigitsBench.int5StringLength       avgt    5    9.387 ±  0.403  ns/op
+NumDigitsBench.int5IfNest             avgt    5    1.735 ± 0.009  ns/op
+NumDigitsBench.int5Log                avgt    5   14.237 ± 0.016  ns/op
+NumDigitsBench.int5StringLength       avgt    5    6.317 ± 0.022  ns/op
 
-NumDigitsBench.int9IfNest             avgt    5    3.984 ±  0.073  ns/op
-NumDigitsBench.int9Log                avgt    5   12.071 ±  0.814  ns/op
-NumDigitsBench.int9StringLength       avgt    5   13.362 ±  0.405  ns/op
+NumDigitsBench.int9IfNest             avgt    5    1.737 ± 0.004  ns/op
+NumDigitsBench.int9Log                avgt    5   14.242 ± 0.046  ns/op
+NumDigitsBench.int9StringLength       avgt    5   10.733 ± 0.010  ns/op
+*/
 
-Process finished with exit code 0
-
- */
 public class NumDigitsBench {
     double base;
 
