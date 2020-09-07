@@ -23,6 +23,12 @@ StoiBench.baselineDouble  avgt    5    3.604 ± 0.004  ns/op
 StoiBench.baselineString  avgt    5    3.649 ± 0.112  ns/op
 StoiBench.doubleToString  avgt    5   79.848 ± 2.180  ns/op
 StoiBench.stringToDouble  avgt    5  147.321 ± 1.438  ns/op
+
+10900k @ 5.2 GHz
+StoiBench.baselineDouble  avgt    5    1.542 ± 0.004  ns/op
+StoiBench.baselineString  avgt    5    1.790 ± 0.054  ns/op
+StoiBench.doubleToString  avgt    5  175.539 ± 4.490  ns/op
+StoiBench.stringToDouble  avgt    5  105.559 ± 1.872  ns/op
  */
 public class StoiBench {
     String s;
