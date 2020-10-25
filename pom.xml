@@ -9,8 +9,8 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <jmh.version>1.21</jmh.version>
-        <maven.compiler.release>12</maven.compiler.release>
+        <jmh.version>1.24</jmh.version>
+        <maven.compiler.release>14</maven.compiler.release>
     </properties>
 
     <dependencies>
