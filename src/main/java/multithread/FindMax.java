@@ -48,9 +48,6 @@ FindMax.findMaxStream_list                1000  avgt   10       3.044 ±     0.4
 FindMax.findMaxStream_list              100000  avgt   10     343.606 ±    46.400  us/op
 FindMax.findMaxStream_list            10000000  avgt   10   57560.206 ±  7512.181  us/op
 FindMax.findMaxStream_list           100000000  avgt   10  613204.818 ± 76014.536  us/op
-
-Process finished with exit code 0
-
  */
 public class FindMax {
     @Param({"1000", "100000", "10000000", "100000000", "500000000"})
