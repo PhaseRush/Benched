@@ -20,6 +20,9 @@ import java.util.concurrent.TimeUnit;
 @Measurement(iterations = 5)
 
 /*
+CPU: AMD Ryzen 7 5800x, PBO
+Windows Version	10.0.19041 Build 19041
+
 Benchmark                     (N)  Mode  Cnt    Score    Error  Units
 AlephFormatter.alephFormat      1  avgt    5   67.101 ±  2.103  ns/op
 AlephFormatter.stringFormat     1  avgt    5  273.048 ±  5.632  ns/op

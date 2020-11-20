@@ -3,6 +3,8 @@ Java Benchmarks for the inquisitive
 
 System specs (used for ALL benchmarks unless otherwise stated)
 
+The latest version of Windows 10 is always used
+
 Current Setup:
 CPU: \
 AMD Ryzen R7 5800x @ 4.8 GHz \
