@@ -22,12 +22,15 @@ import java.util.concurrent.TimeUnit;
 /*
 Benchmark                     (N)  Mode  Cnt    Score    Error  Units
 AlephFormatter.alephFormat      1  avgt    5   67.101 ±  2.103  ns/op
-AlephFormatter.alephFormat     10  avgt    5   76.470 ±  4.423  ns/op
-AlephFormatter.alephFormat    100  avgt    5  113.705 ±  5.941  ns/op
-AlephFormatter.alephFormat   1000  avgt    5  257.674 ± 19.363  ns/op
 AlephFormatter.stringFormat     1  avgt    5  273.048 ±  5.632  ns/op
+
+AlephFormatter.alephFormat     10  avgt    5   76.470 ±  4.423  ns/op
 AlephFormatter.stringFormat    10  avgt    5  264.106 ±  3.018  ns/op
+
+AlephFormatter.alephFormat    100  avgt    5  113.705 ±  5.941  ns/op
 AlephFormatter.stringFormat   100  avgt    5  328.445 ± 15.986  ns/op
+
+AlephFormatter.alephFormat   1000  avgt    5  257.674 ± 19.363  ns/op
 AlephFormatter.stringFormat  1000  avgt    5  437.688 ± 11.813  ns/op
  */
 public class AlephFormatter {
