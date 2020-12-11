@@ -20,11 +20,12 @@ import java.util.stream.IntStream;
 @Measurement(iterations = 5)
 
 /*
-Benchmark                        (N)  Mode  Cnt    Score    Error  Units
-RemoveVowels.loopArrayFilter    100000  avgt    5   39.570 ±  0.574  us/op
-RemoveVowels.loopSetFilter      100000  avgt    5  912.286 ± 12.202  us/op
-RemoveVowels.streamLcmFilter    100000  avgt    5  553.343 ± 18.543  us/op
-RemoveVowels.streamThiccFilter  100000  avgt    5  494.789 ±  4.130  us/op
+Benchmark                          (N)  Mode  Cnt    Score    Error  Units
+RemoveVowels.loopArrayFilter    100000  avgt    5   33.397 ±  1.831  us/op
+RemoveVowels.loopSetFilter      100000  avgt    5  922.077 ± 19.480  us/op
+RemoveVowels.regex              100000  avgt    5  662.226 ± 16.346  us/op
+RemoveVowels.streamLcmFilter    100000  avgt    5  546.964 ±  6.901  us/op
+RemoveVowels.streamThiccFilter  100000  avgt    5  235.682 ±  4.216  us/op
  */
 public class RemoveVowels {
 
@@ -58,7 +59,7 @@ public class RemoveVowels {
 
     @Benchmark
     public void streamThiccFilter(Blackhole bh) {
-        bh.consume(unit.toUpperCase()
+        bh.consume(unit
                 .chars()
                 .filter(n -> (n == 'a' || n == 'e' || n == 'i' || n == 'o' || n == 'u' ||
                         n == 'A' || n == 'E' || n == 'I' || n == 'O' || n == 'U'))
@@ -93,5 +94,10 @@ public class RemoveVowels {
             count += mask[c];
         }
         bh.consume(count);
+    }
+
+    @Benchmark
+    public void regex(Blackhole bh) {
+        bh.consume(unit.replaceAll("[aeiouAEIOU]", "").length());
     }
 }
