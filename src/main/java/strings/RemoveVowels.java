@@ -24,7 +24,7 @@ Benchmark                        (N)  Mode  Cnt    Score    Error  Units
 RemoveVowels.loopArrayFilter    100000  avgt    5   39.570 ±  0.574  us/op
 RemoveVowels.loopSetFilter      100000  avgt    5  912.286 ± 12.202  us/op
 RemoveVowels.streamLcmFilter    100000  avgt    5  553.343 ± 18.543  us/op
-RemoveVowels.streamThiccFilter  100000  avgt    5  494.789 ±  4.130   us/op
+RemoveVowels.streamThiccFilter  100000  avgt    5  494.789 ±  4.130  us/op
  */
 public class RemoveVowels {
 
