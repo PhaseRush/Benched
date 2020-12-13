@@ -20,19 +20,42 @@ import java.util.stream.IntStream;
 @Measurement(iterations = 5)
 
 /*
-Benchmark                          (N)  Mode  Cnt    Score    Error  Units
-RemoveVowels.loopArrayFilter    100000  avgt    5   33.397 ±  1.831  us/op
-RemoveVowels.loopSetFilter      100000  avgt    5  922.077 ± 19.480  us/op
-RemoveVowels.regex              100000  avgt    5  662.226 ± 16.346  us/op
-RemoveVowels.streamLcmFilter    100000  avgt    5  546.964 ±  6.901  us/op
-RemoveVowels.streamThiccFilter  100000  avgt    5  235.682 ±  4.216  us/op
+Benchmark                                     (N)  Mode  Cnt        Score       Error  Units
+RemoveVowels.loopArrayFilter                   10  avgt    5        0.044 ±     0.004  us/op
+RemoveVowels.loopArrayFilter_Amortized         10  avgt    5        0.009 ±     0.001  us/op
+RemoveVowels.loopSetFilter                     10  avgt    5        0.103 ±     0.002  us/op
+RemoveVowels.loopSetFilter_Amortized           10  avgt    5        0.027 ±     0.001  us/op
+RemoveVowels.regex                             10  avgt    5        0.280 ±     0.006  us/op
+RemoveVowels.streamLcmFilter                   10  avgt    5        0.052 ±     0.001  us/op
+RemoveVowels.streamThiccFilter                 10  avgt    5        0.058 ±     0.001  us/op
+
+
+RemoveVowels.loopArrayFilter                10000  avgt    5        3.299 ±     0.102  us/op
+RemoveVowels.loopArrayFilter_Amortized      10000  avgt    5        3.414 ±     0.092  us/op
+RemoveVowels.loopSetFilter                  10000  avgt    5       29.120 ±     0.619  us/op
+RemoveVowels.loopSetFilter_Amortized        10000  avgt    5       36.133 ±     5.149  us/op
+RemoveVowels.regex                          10000  avgt    5       63.884 ±     1.876  us/op
+RemoveVowels.streamLcmFilter                10000  avgt    5       34.222 ±     0.705  us/op
+RemoveVowels.streamThiccFilter              10000  avgt    5       24.301 ±     0.302  us/op
+
+
+RemoveVowels.loopArrayFilter            100000000  avgt    5    64344.565 ±  2156.860  us/op
+RemoveVowels.loopArrayFilter_Amortized  100000000  avgt    5    65623.615 ±  1332.466  us/op
+RemoveVowels.loopSetFilter              100000000  avgt    5  1165080.616 ±  9212.730  us/op
+RemoveVowels.loopSetFilter_Amortized    100000000  avgt    5   979675.865 ±  6990.508  us/op
+RemoveVowels.regex                      100000000  avgt    5   702162.545 ± 30231.671  us/op
+RemoveVowels.streamLcmFilter            100000000  avgt    5   608230.428 ±  3287.993  us/op
+RemoveVowels.streamThiccFilter          100000000  avgt    5   239484.547 ±  6064.727  us/op
  */
 public class RemoveVowels {
 
-    @Param({"100000"})
+    @Param({"10","10000", "100000000"})
     private int N;
 
     private String unit;
+
+    private int[] vowelMask;
+    private Set<Character> vowelSet;
 
     public static void main(String[] args) throws RunnerException {
 
@@ -47,6 +70,20 @@ public class RemoveVowels {
     @Setup
     public void setup() {
         unit = RandomStringUtils.randomAlphanumeric(N);
+
+        vowelMask = new int[128];
+        vowelMask['a'] = 1;
+        vowelMask['e'] = 1;
+        vowelMask['i'] = 1;
+        vowelMask['o'] = 1;
+        vowelMask['u'] = 1;
+        vowelMask['A'] = 1;
+        vowelMask['E'] = 1;
+        vowelMask['I'] = 1;
+        vowelMask['O'] = 1;
+        vowelMask['U'] = 1;
+
+        vowelSet = Set.of('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U');
     }
 
     @Benchmark
@@ -77,6 +114,15 @@ public class RemoveVowels {
     }
 
     @Benchmark
+    public void loopSetFilter_Amortized(Blackhole bh) {
+        int count = 0;
+        for (char c : unit.toCharArray()) {
+            if (!vowelSet.contains(c)) count++;
+        }
+        bh.consume(count);
+    }
+
+    @Benchmark
     public void loopArrayFilter(Blackhole bh) {
         final int[] mask = new int[128];
         mask['a'] = 1;
@@ -93,7 +139,16 @@ public class RemoveVowels {
         for (char c : unit.toCharArray()) {
             count += mask[c];
         }
-        bh.consume(count);
+        bh.consume(unit.length() - count);
+    }
+
+    @Benchmark
+    public void loopArrayFilter_Amortized(Blackhole bh) {
+        int count = 0;
+        for (char c : unit.toCharArray()) {
+            count += vowelMask[c];
+        }
+        bh.consume(unit.length() - count);
     }
 
     @Benchmark
