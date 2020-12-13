@@ -26,9 +26,9 @@ import java.util.regex.Pattern;
 Benchmark                                        (N)  Mode  Cnt        Score         Error  Units
 RemoveVowels.loopArrayFilter                      10  avgt    5        0.042 ±       0.001  us/op
 RemoveVowels.loopArrayFilter_Amortized            10  avgt    5        0.008 ±       0.001  us/op
+RemoveVowels.loopSetFilter                        10  avgt    5        0.126 ±       0.087  us/op
 RemoveVowels.loopHashSetFilter                    10  avgt    5        0.148 ±       0.023  us/op
 RemoveVowels.loopHashSetFilter_Amortized          10  avgt    5        0.019 ±       0.016  us/op
-RemoveVowels.loopSetFilter                        10  avgt    5        0.126 ±       0.087  us/op
 RemoveVowels.regex                                10  avgt    5        0.284 ±       0.001  us/op
 RemoveVowels.regex_Amortized                      10  avgt    5        0.135 ±       0.070  us/op
 RemoveVowels.streamLcmFilter                      10  avgt    5        0.051 ±       0.001  us/op
@@ -37,9 +37,9 @@ RemoveVowels.streamThiccFilter_Parallel           10  avgt    5        7.090 ± 
 
 RemoveVowels.loopArrayFilter                     100  avgt    5        0.065 ±       0.003  us/op
 RemoveVowels.loopArrayFilter_Amortized           100  avgt    5        0.030 ±       0.001  us/op
+RemoveVowels.loopSetFilter                       100  avgt    5        0.319 ±       0.159  us/op
 RemoveVowels.loopHashSetFilter                   100  avgt    5        0.393 ±       0.210  us/op
 RemoveVowels.loopHashSetFilter_Amortized         100  avgt    5        0.184 ±       0.003  us/op
-RemoveVowels.loopSetFilter                       100  avgt    5        0.319 ±       0.159  us/op
 RemoveVowels.regex                               100  avgt    5        0.904 ±       0.832  us/op
 RemoveVowels.regex_Amortized                     100  avgt    5        0.833 ±       0.545  us/op
 RemoveVowels.streamLcmFilter                     100  avgt    5        0.327 ±       0.138  us/op
@@ -48,9 +48,9 @@ RemoveVowels.streamThiccFilter_Parallel          100  avgt    5       13.856 ± 
 
 RemoveVowels.loopArrayFilter                   10000  avgt    5        3.147 ±       0.031  us/op
 RemoveVowels.loopArrayFilter_Amortized         10000  avgt    5        3.147 ±       0.038  us/op
+RemoveVowels.loopSetFilter                     10000  avgt    5       23.777 ±       1.521  us/op
 RemoveVowels.loopHashSetFilter                 10000  avgt    5       19.987 ±       0.273  us/op
 RemoveVowels.loopHashSetFilter_Amortized       10000  avgt    5       16.102 ±       2.056  us/op
-RemoveVowels.loopSetFilter                     10000  avgt    5       23.777 ±       1.521  us/op
 RemoveVowels.regex                             10000  avgt    5       79.519 ±      42.925  us/op
 RemoveVowels.regex_Amortized                   10000  avgt    5       73.491 ±      35.444  us/op
 RemoveVowels.streamLcmFilter                   10000  avgt    5       30.275 ±       0.983  us/op
@@ -59,9 +59,9 @@ RemoveVowels.streamThiccFilter_Parallel        10000  avgt    5       17.228 ± 
 
 RemoveVowels.loopArrayFilter              1000000000  avgt    5   610578.502 ±    4550.097  us/op
 RemoveVowels.loopArrayFilter_Amortized    1000000000  avgt    5   620377.731 ±   15831.890  us/op
+RemoveVowels.loopSetFilter                1000000000  avgt    5  9533203.230 ±  785787.479  us/op
 RemoveVowels.loopHashSetFilter            1000000000  avgt    5  4459794.033 ±  672294.458  us/op
 RemoveVowels.loopHashSetFilter_Amortized  1000000000  avgt    5  5359775.650 ±  740845.202  us/op
-RemoveVowels.loopSetFilter                1000000000  avgt    5  9533203.230 ±  785787.479  us/op
 RemoveVowels.regex                        1000000000  avgt    5  7607016.560 ± 3205685.701  us/op
 RemoveVowels.regex_Amortized              1000000000  avgt    5  7777850.210 ± 3391998.383  us/op
 RemoveVowels.streamLcmFilter              1000000000  avgt    5  6439135.130 ± 2227171.904  us/op
