@@ -15,7 +15,7 @@ import java.util.stream.IntStream;
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @State(Scope.Benchmark)
-@Fork(value = 2, jvmArgs = {"-Xms6G", "-Xmx6G"})
+@Fork(value = 2, jvmArgs = {"-Xms50G", "-Xmx50G"})
 @Warmup(iterations = 3)
 @Measurement(iterations = 5)
 
@@ -28,6 +28,15 @@ RemoveVowels.loopSetFilter_Amortized           10  avgt    5        0.027 ±    
 RemoveVowels.regex                             10  avgt    5        0.280 ±     0.006  us/op
 RemoveVowels.streamLcmFilter                   10  avgt    5        0.052 ±     0.001  us/op
 RemoveVowels.streamThiccFilter                 10  avgt    5        0.058 ±     0.001  us/op
+
+
+RemoveVowels.loopArrayFilter                  100  avgt    5        0.071 ±     0.001  us/op
+RemoveVowels.loopArrayFilter_Amortized        100  avgt    5        0.034 ±     0.001  us/op
+RemoveVowels.loopSetFilter                    100  avgt    5        0.327 ±     0.145  us/op
+RemoveVowels.loopSetFilter_Amortized          100  avgt    5        0.245 ±     0.006  us/op
+RemoveVowels.regex                            100  avgt    5        0.993 ±     0.664  us/op
+RemoveVowels.streamLcmFilter                  100  avgt    5        0.341 ±     0.136  us/op
+RemoveVowels.streamThiccFilter                100  avgt    5        0.280 ±     0.015  us/op
 
 
 RemoveVowels.loopArrayFilter                10000  avgt    5        3.299 ±     0.102  us/op
@@ -46,10 +55,19 @@ RemoveVowels.loopSetFilter_Amortized    100000000  avgt    5   979675.865 ±  69
 RemoveVowels.regex                      100000000  avgt    5   702162.545 ± 30231.671  us/op
 RemoveVowels.streamLcmFilter            100000000  avgt    5   608230.428 ±  3287.993  us/op
 RemoveVowels.streamThiccFilter          100000000  avgt    5   239484.547 ±  6064.727  us/op
+
+
+RemoveVowels.loopArrayFilter            1000000000  avgt    5    688661.429 ±   35900.688  us/op
+RemoveVowels.loopArrayFilter_Amortized  1000000000  avgt    5    670070.806 ±    9419.759  us/op
+RemoveVowels.loopSetFilter              1000000000  avgt    5  10153932.980 ±  161925.882  us/op
+RemoveVowels.loopSetFilter_Amortized    1000000000  avgt    5   9753229.980 ±  801770.743  us/op
+RemoveVowels.regex                      1000000000  avgt    5   8230948.420 ± 4252443.775  us/op
+RemoveVowels.streamLcmFilter            1000000000  avgt    5   6529096.640 ± 2268052.555  us/op
+RemoveVowels.streamThiccFilter          1000000000  avgt    5   2228309.496 ±    5077.366  us/op
  */
 public class RemoveVowels {
 
-    @Param({"10","10000", "100000000"})
+    @Param({"100", "1000000000"})
     private int N;
 
     private String unit;
