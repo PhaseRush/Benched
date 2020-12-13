@@ -8,6 +8,7 @@ import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 
+import java.util.Arrays;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
@@ -20,42 +21,48 @@ import java.util.regex.Pattern;
 @Measurement(iterations = 5)
 
 /*
-Benchmark                                      (N)  Mode  Cnt         Score         Error  Units
-RemoveVowels.loopArrayFilter                    10  avgt    5         0.067 ±       0.007  us/op
-RemoveVowels.loopArrayFilter_Amortized          10  avgt    5         0.013 ±       0.011  us/op
-RemoveVowels.loopSetFilter                      10  avgt    5         0.191 ±       0.154  us/op
-RemoveVowels.loopSetFilter_Amortized            10  avgt    5         0.038 ±       0.021  us/op
-RemoveVowels.regex                              10  avgt    5         0.562 ±       0.687  us/op
-RemoveVowels.regex_Amortized                    10  avgt    5         0.126 ±       0.100  us/op
-RemoveVowels.streamLcmFilter                    10  avgt    5         0.056 ±       0.002  us/op
-RemoveVowels.streamThiccFilter                  10  avgt    5         0.045 ±       0.004  us/op
+Benchmark                                       (N)  Mode  Cnt         Score         Error  Units
+RemoveVowels.loopArrayFilter                     10  avgt    5         0.050 ±       0.002  us/op
+RemoveVowels.loopArrayFilter_Amortized           10  avgt    5         0.009 ±       0.001  us/op
+RemoveVowels.loopSetFilter                       10  avgt    5         0.128 ±       0.114  us/op
+RemoveVowels.loopSetFilter_Amortized             10  avgt    5         0.029 ±       0.019  us/op
+RemoveVowels.regex                               10  avgt    5         0.385 ±       0.043  us/op
+RemoveVowels.regex_Amortized                     10  avgt    5         0.199 ±       0.144  us/op
+RemoveVowels.streamLcmFilter                     10  avgt    5         0.054 ±       0.001  us/op
+RemoveVowels.streamThiccFilter                   10  avgt    5         0.043 ±       0.001  us/op
+RemoveVowels.streamThiccFilter_Parallel          10  avgt    5         7.388 ±       0.341  us/op
 
-RemoveVowels.loopArrayFilter                   100  avgt    5         0.099 ±       0.003  us/op
-RemoveVowels.loopArrayFilter_Amortized         100  avgt    5         0.045 ±       0.005  us/op
-RemoveVowels.loopSetFilter                     100  avgt    5         0.443 ±       0.164  us/op
-RemoveVowels.loopSetFilter_Amortized           100  avgt    5         0.358 ±       0.013  us/op
-RemoveVowels.regex                             100  avgt    5         1.231 ±       1.115  us/op
-RemoveVowels.regex_Amortized                   100  avgt    5         0.926 ±       0.780  us/op
-RemoveVowels.streamLcmFilter                   100  avgt    5         0.345 ±       0.135  us/op
-RemoveVowels.streamThiccFilter                 100  avgt    5         0.277 ±       0.011  us/op
 
-RemoveVowels.loopArrayFilter                 10000  avgt    5         4.603 ±       1.180  us/op
-RemoveVowels.loopArrayFilter_Amortized       10000  avgt    5         4.532 ±       0.949  us/op
-RemoveVowels.loopSetFilter                   10000  avgt    5        49.093 ±       1.923  us/op
-RemoveVowels.loopSetFilter_Amortized         10000  avgt    5        46.765 ±       3.051  us/op
-RemoveVowels.regex                           10000  avgt    5        76.605 ±      45.409  us/op
-RemoveVowels.regex_Amortized                 10000  avgt    5        86.853 ±      45.574  us/op
-RemoveVowels.streamLcmFilter                 10000  avgt    5        34.205 ±       1.180  us/op
-RemoveVowels.streamThiccFilter               10000  avgt    5        31.285 ±       0.713  us/op
+RemoveVowels.loopArrayFilter                    100  avgt    5         0.076 ±       0.004  us/op
+RemoveVowels.loopArrayFilter_Amortized          100  avgt    5         0.033 ±       0.001  us/op
+RemoveVowels.loopSetFilter                      100  avgt    5         0.345 ±       0.170  us/op
+RemoveVowels.loopSetFilter_Amortized            100  avgt    5         0.238 ±       0.068  us/op
+RemoveVowels.regex                              100  avgt    5         1.053 ±       0.890  us/op
+RemoveVowels.regex_Amortized                    100  avgt    5         0.905 ±       0.796  us/op
+RemoveVowels.streamLcmFilter                    100  avgt    5         0.346 ±       0.136  us/op
+RemoveVowels.streamThiccFilter                  100  avgt    5         0.275 ±       0.011  us/op
+RemoveVowels.streamThiccFilter_Parallel         100  avgt    5        14.048 ±       4.378  us/op
 
-RemoveVowels.loopArrayFilter            1000000000  avgt    5    885800.393 ±   20505.749  us/op
-RemoveVowels.loopArrayFilter_Amortized  1000000000  avgt    5    860979.023 ±   50693.750  us/op
-RemoveVowels.loopSetFilter              1000000000  avgt    5  11840644.800 ±  523138.178  us/op
-RemoveVowels.loopSetFilter_Amortized    1000000000  avgt    5  11701675.280 ±  332665.032  us/op
-RemoveVowels.regex                      1000000000  avgt    5   8504775.590 ± 3820477.462  us/op
-RemoveVowels.regex_Amortized            1000000000  avgt    5   8673446.090 ± 3785713.628  us/op
-RemoveVowels.streamLcmFilter            1000000000  avgt    5   6626493.830 ± 2261788.918  us/op
-RemoveVowels.streamThiccFilter          1000000000  avgt    5   2230030.732 ±   58368.680  us/op
+
+RemoveVowels.loopArrayFilter                  10000  avgt    5         3.388 ±       0.111  us/op
+RemoveVowels.loopArrayFilter_Amortized        10000  avgt    5         3.475 ±       0.149  us/op
+RemoveVowels.loopSetFilter                    10000  avgt    5        29.955 ±       3.176  us/op
+RemoveVowels.loopSetFilter_Amortized          10000  avgt    5        27.272 ±       2.566  us/op
+RemoveVowels.regex                            10000  avgt    5        81.807 ±      50.543  us/op
+RemoveVowels.regex_Amortized                  10000  avgt    5        85.993 ±      50.730  us/op
+RemoveVowels.streamLcmFilter                  10000  avgt    5        21.863 ±       0.431  us/op
+RemoveVowels.streamThiccFilter                10000  avgt    5        20.554 ±       0.280  us/op
+RemoveVowels.streamThiccFilter_Parallel       10000  avgt    5        17.953 ±       2.041  us/op
+
+RemoveVowels.loopArrayFilter             1000000000  avgt    5    668448.124 ±   16559.729  us/op
+RemoveVowels.loopArrayFilter_Amortized   1000000000  avgt    5    666494.337 ±   28720.441  us/op
+RemoveVowels.loopSetFilter               1000000000  avgt    5  10069305.450 ±  453083.840  us/op
+RemoveVowels.loopSetFilter_Amortized     1000000000  avgt    5  10085519.990 ±  222339.965  us/op
+RemoveVowels.regex                       1000000000  avgt    5   8140364.360 ± 3372461.290  us/op
+RemoveVowels.regex_Amortized             1000000000  avgt    5   8238729.660 ± 3635157.965  us/op
+RemoveVowels.streamLcmFilter             1000000000  avgt    5   6492456.870 ± 2263767.217  us/op
+RemoveVowels.streamThiccFilter           1000000000  avgt    5   2158537.660 ±   64251.445  us/op
+RemoveVowels.streamThiccFilter_Parallel  1000000000  avgt    5    281348.069 ±    7285.706  us/op
 */
 public class RemoveVowels {
 
@@ -83,16 +90,17 @@ public class RemoveVowels {
         unit = RandomStringUtils.randomAlphanumeric(N);
 
         vowelMask = new int[128];
-        vowelMask['a'] = 1;
-        vowelMask['e'] = 1;
-        vowelMask['i'] = 1;
-        vowelMask['o'] = 1;
-        vowelMask['u'] = 1;
-        vowelMask['A'] = 1;
-        vowelMask['E'] = 1;
-        vowelMask['I'] = 1;
-        vowelMask['O'] = 1;
-        vowelMask['U'] = 1;
+        Arrays.fill(vowelMask, 1);
+        vowelMask['a'] = 0;
+        vowelMask['e'] = 0;
+        vowelMask['i'] = 0;
+        vowelMask['o'] = 0;
+        vowelMask['u'] = 0;
+        vowelMask['A'] = 0;
+        vowelMask['E'] = 0;
+        vowelMask['I'] = 0;
+        vowelMask['O'] = 0;
+        vowelMask['U'] = 0;
 
         vowelSet = Set.of('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U');
     }
@@ -109,6 +117,16 @@ public class RemoveVowels {
     public void streamThiccFilter(Blackhole bh) {
         bh.consume(unit
                 .chars()
+                .filter(n -> (n == 'a' || n == 'e' || n == 'i' || n == 'o' || n == 'u' ||
+                        n == 'A' || n == 'E' || n == 'I' || n == 'O' || n == 'U'))
+                .count());
+    }
+
+    @Benchmark
+    public void streamThiccFilter_Parallel(Blackhole bh) {
+        bh.consume(unit
+                .chars()
+                .parallel()
                 .filter(n -> (n == 'a' || n == 'e' || n == 'i' || n == 'o' || n == 'u' ||
                         n == 'A' || n == 'E' || n == 'I' || n == 'O' || n == 'U'))
                 .count());
@@ -136,21 +154,22 @@ public class RemoveVowels {
     @Benchmark
     public void loopArrayFilter(Blackhole bh) {
         final int[] mask = new int[128];
-        mask['a'] = 1;
-        mask['e'] = 1;
-        mask['i'] = 1;
-        mask['o'] = 1;
-        mask['u'] = 1;
-        mask['A'] = 1;
-        mask['E'] = 1;
-        mask['I'] = 1;
-        mask['O'] = 1;
-        mask['U'] = 1;
+        Arrays.fill(mask, 1);
+        mask['a'] = 0;
+        mask['e'] = 0;
+        mask['i'] = 0;
+        mask['o'] = 0;
+        mask['u'] = 0;
+        mask['A'] = 0;
+        mask['E'] = 0;
+        mask['I'] = 0;
+        mask['O'] = 0;
+        mask['U'] = 0;
         int count = 0;
         for (char c : unit.toCharArray()) {
             count += mask[c];
         }
-        bh.consume(unit.length() - count);
+        bh.consume(count);
     }
 
     @Benchmark
@@ -159,7 +178,7 @@ public class RemoveVowels {
         for (char c : unit.toCharArray()) {
             count += vowelMask[c];
         }
-        bh.consume(unit.length() - count);
+        bh.consume(count);
     }
 
     @Benchmark
