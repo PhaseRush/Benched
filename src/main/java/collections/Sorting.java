@@ -26,10 +26,16 @@ Sorting.bogosort_array             10  avgt    5  96587.607 ± 71011.437  us/op
 Sorting.parallel_mergesort_array   10  avgt    5      1.132 ±     0.013  us/op
 Sorting.qsort_dualpiv_array        10  avgt    5      1.132 ±     0.009  us/op
 Sorting.timsort_list               10  avgt    5      1.281 ±     0.016  us/op
+
+Benchmark                         (N)  Mode  Cnt         Score          Error  Units
+Sorting.bogosort_array             12  avgt    5  20804411.238 ± 45508526.397  us/op
+Sorting.parallel_mergesort_array   12  avgt    5         1.149 ±        0.002  us/op
+Sorting.qsort_dualpiv_array        12  avgt    5         1.149 ±        0.003  us/op
+Sorting.timsort_list               12  avgt    5         1.346 ±        0.022  us/op
  */
 public class Sorting {
     //    @Param({"1", "100", "10000", "1000000", "1000000000"})
-    @Param({"10"})
+    @Param({"12"})
     private int N;
 
     private static List<Integer> list;
@@ -181,17 +187,17 @@ public class Sorting {
         x[b] = t;
     }
 
-    @Benchmark
-    public void mergesort_array(Blackhole bh) {
-        mergeSort(0, objarr.length, 0, false, 0);
-        bh.consume(objarr);
-    }
+//    @Benchmark
+//    public void mergesort_array(Blackhole bh) {
+//        mergeSort(0, objarr.length, 0, false, 0);
+//        bh.consume(objarr);
+//    }
 
-    @Benchmark
-    public void timsort_array(Blackhole bh) {
-        mergeSort(0, objarr.length, 0, true, 7);
-        bh.consume(objarr);
-    }
+//    @Benchmark
+//    public void timsort_array(Blackhole bh) {
+//        mergeSort(0, objarr.length, 0, true, 7);
+//        bh.consume(objarr);
+//    }
 
 
     @Benchmark
