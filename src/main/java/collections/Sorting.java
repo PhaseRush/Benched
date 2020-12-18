@@ -21,21 +21,32 @@ import java.util.stream.Collectors;
 @Measurement(iterations = 5)
 
 /*
+AMD 5800X @ 4.7
+96gb DDR4 @ 2400mhz 17-17-17-39 2T
+
 Benchmark                         (N)  Mode  Cnt      Score       Error  Units
-Sorting.bogosort_array             10  avgt    5  96587.607 ± 71011.437  us/op
+Sorting.bogosort_array             10  avgt    5  96587.607 ± 71011.437  us/op (0.09 seconds)
 Sorting.parallel_mergesort_array   10  avgt    5      1.132 ±     0.013  us/op
 Sorting.qsort_dualpiv_array        10  avgt    5      1.132 ±     0.009  us/op
 Sorting.timsort_list               10  avgt    5      1.281 ±     0.016  us/op
 
 Benchmark                         (N)  Mode  Cnt         Score          Error  Units
-Sorting.bogosort_array             12  avgt    5  20804411.238 ± 45508526.397  us/op
+Sorting.bogosort_array             12  avgt    5  20804411.238 ± 45508526.397  us/op (20.8 seconds)
 Sorting.parallel_mergesort_array   12  avgt    5         1.149 ±        0.002  us/op
 Sorting.qsort_dualpiv_array        12  avgt    5         1.149 ±        0.003  us/op
 Sorting.timsort_list               12  avgt    5         1.346 ±        0.022  us/op
+
+Benchmark                             (N)  Mode  Cnt       Score       Error  Units
+Sorting.parallel_mergesort_array  1000000  avgt    5    5233.053 ±   896.374  us/op
+Sorting.qsort_dualpiv_array       1000000  avgt    5   53825.017 ±   923.783  us/op
+Sorting.timsort_list              1000000  avgt    5  207312.003 ± 24699.618  us/op
+
+Sorting.parallel_mergesort_array  100000000  avgt    5  1053131.881 ± 2324420.430  us/op
+Sorting.qsort_dualpiv_array       100000000  avgt    5  7229146.889 ±  146242.751  us/op
  */
 public class Sorting {
     //    @Param({"1", "100", "10000", "1000000", "1000000000"})
-    @Param({"12"})
+    @Param({"100000000"})
     private int N;
 
     private static List<Integer> list;
@@ -79,13 +90,13 @@ public class Sorting {
         }
     }
 
-    @Benchmark
-    public void bogosort_array(Blackhole bh) {
-        while (!sorted()) {
-            randomize();
-        }
-        bh.consume(array);
-    }
+//    @Benchmark
+//    public void bogosort_array(Blackhole bh) {
+//        while (!sorted()) {
+//            randomize();
+//        }
+//        bh.consume(array);
+//    }
 
     @Benchmark
     public void qsort_dualpiv_array(Blackhole bh) {
@@ -93,7 +104,7 @@ public class Sorting {
         bh.consume(array);
     }
 
-    //https://www.baeldung.com/java-quicksort
+    //https://www.baeldung.com/java-quicksort (buggy tho lmao)
     private int partition(int arr[], int begin, int end) {
         int pivot = arr[end];
         int i = (begin - 1);
@@ -124,11 +135,11 @@ public class Sorting {
         }
     }
 
-    @Benchmark
-    public void qsort_singlepiv_array(Blackhole bh) {
-        quickSort(array, 0, array.length);
-        bh.consume(array);
-    }
+//    @Benchmark
+//    public void qsort_singlepiv_array(Blackhole bh) {
+//        quickSort(array, 0, array.length);
+//        bh.consume(array);
+//    }
 
     @Benchmark
     public void parallel_mergesort_array(Blackhole bh) {
