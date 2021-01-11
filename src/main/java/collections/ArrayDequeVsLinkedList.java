@@ -14,9 +14,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.MILLISECONDS)
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
 @State(Scope.Benchmark)
-@Fork(value = 2, jvmArgs = {"-Xms4G", "-Xmx4G"})
+@Fork(value = 2, jvmArgs = {"-Xms4G", "-Xmx40G"})
 @Warmup(iterations = 3)
 @Measurement(iterations = 5)
 
@@ -33,7 +33,7 @@ ArrayDequeVsLinkedList.arraydeque_init_preSized         10000000  avgt    5   65
  */
 public class ArrayDequeVsLinkedList {
 
-    @Param({"10000000"})
+    @Param({"10", "1000", "10000000", "100000000"})
     private int N;
 
     private Deque<Integer> ad;
@@ -96,6 +96,20 @@ public class ArrayDequeVsLinkedList {
             ll.push(feeder.get(i));
         }
         bh.consume(ll);
+    }
+
+    @Benchmark
+    public void linkedlist_traverse(Blackhole bh) {
+        for (Integer integer : ll) {
+            bh.consume(integer);
+        }
+    }
+
+    @Benchmark
+    public void arraydeque_traverse(Blackhole bh) {
+        for (Integer integer : ad) {
+            bh.consume(integer);
+        }
     }
 
     @Benchmark
