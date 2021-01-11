@@ -36,7 +36,7 @@ HashSets.populate_fastUtilIntHashSet           100000000  avgt    5   6418923.84
  */
 public class HashSets {
     //    @Param({"1", "100", "10000", "1000000", "1000000000"})
-    @Param({"100000000"})
+    @Param({"1000000000"})
     private int N;
 
     private static List<Integer> feederList;
