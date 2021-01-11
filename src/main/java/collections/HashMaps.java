@@ -1,12 +1,12 @@
 package collections;
 
-import com.gs.collections.api.map.ImmutableMap;
-import com.gs.collections.api.map.MutableMap;
-import com.gs.collections.impl.map.mutable.UnifiedMap;
-import com.gs.collections.impl.map.mutable.primitive.IntIntHashMap;
 import com.koloboke.collect.map.hash.HashIntIntMap;
 import com.koloboke.collect.map.hash.HashIntIntMaps;
 import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
+import org.eclipse.collections.api.map.ImmutableMap;
+import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.impl.map.mutable.UnifiedMap;
+import org.eclipse.collections.impl.map.mutable.primitive.IntIntHashMap;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
 import org.openjdk.jmh.runner.Runner;
@@ -92,8 +92,8 @@ public class HashMaps {
         eclipseGsPrimitiveHashMap = new IntIntHashMap();
         freqMap.forEach((k, v) -> eclipseGsPrimitiveHashMap.put(k, v));
         eclipseGsMutableHashMap = new UnifiedMap<>(freqMap);
-        eclipseGsMutableConcurrentHashMap = new com.gs.collections.impl.map.mutable.ConcurrentHashMap<>();
-        eclipseGsImmutableConcurrentMap = new com.gs.collections.impl.map.immutable.ImmutableUnifiedMap<>();
+        eclipseGsMutableConcurrentHashMap = new org.eclipse.collections.impl.map.mutable.ConcurrentHashMap<>();
+        eclipseGsImmutableConcurrentMap = new org.eclipse.collections.impl.map.immutable.ImmutableUnifiedMap<>();
 //        eclipseGsMutableConcurrentHashMap
     }
 
