@@ -17,63 +17,36 @@ import java.util.stream.IntStream;
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @State(Scope.Benchmark)
-@Fork(value = 2, jvmArgs = {"-Xms4G", "-Xmx40G"})
+@Fork(value = 2, jvmArgs = {"-Xms4G", "-Xmx56G"})
 @Warmup(iterations = 3)
 @Measurement(iterations = 5)
 
 /*
-Benchmark                                           (M)       (N)  Mode  Cnt     Score      Error  Units
-CollectionContains.hashSet_multiple                   1        10  avgt    5     1.021 ±    0.004  us/op
-CollectionContains.hashSet_multiple                   1  10000000  avgt    5     5.138 ±    1.299  us/op
-CollectionContains.hashSet_multiple              100000  10000000  avgt    5  5119.828 ± 1074.545  us/op
-CollectionContains.hashSet_single_exists              1        10  avgt    5     1.022 ±    0.020  us/op
-CollectionContains.hashSet_single_exists              1  10000000  avgt    5     4.882 ±    1.001  us/op
-CollectionContains.hashSet_single_exists         100000        10  avgt    5     1.022 ±    0.034  us/op
-CollectionContains.hashSet_single_exists         100000  10000000  avgt    5     5.000 ±    0.853  us/op
-CollectionContains.hashSet_single_missing             1        10  avgt    5     1.018 ±    0.002  us/op
-CollectionContains.hashSet_single_missing             1  10000000  avgt    5     4.871 ±    1.854  us/op
-CollectionContains.hashSet_single_missing        100000        10  avgt    5     1.018 ±    0.012  us/op
-CollectionContains.hashSet_single_missing        100000  10000000  avgt    5     5.267 ±    0.703  us/op
-CollectionContains.linkedHashSet_multiple             1        10  avgt    5     1.031 ±    0.023  us/op
-CollectionContains.linkedHashSet_multiple             1  10000000  avgt    5     5.362 ±    1.379  us/op
-CollectionContains.linkedHashSet_multiple        100000  10000000  avgt    5  5124.894 ± 1587.096  us/op
-CollectionContains.linkedHashSet_single_exists        1        10  avgt    5     1.031 ±    0.041  us/op
-CollectionContains.linkedHashSet_single_exists        1  10000000  avgt    5     4.992 ±    1.106  us/op
-CollectionContains.linkedHashSet_single_exists   100000        10  avgt    5     1.008 ±    0.007  us/op
-CollectionContains.linkedHashSet_single_exists   100000  10000000  avgt    5     5.449 ±    0.241  us/op
-CollectionContains.linkedHashSet_single_missing       1        10  avgt    5     1.032 ±    0.030  us/op
-CollectionContains.linkedHashSet_single_missing       1  10000000  avgt    5     5.129 ±    0.381  us/op
-CollectionContains.linkedHashSet_single_missing  100000        10  avgt    5     1.030 ±    0.029  us/op
-CollectionContains.linkedHashSet_single_missing  100000  10000000  avgt    5     5.674 ±    0.903  us/op
-CollectionContains.stack_multiple                     1        10  avgt    5     1.029 ±    0.020  us/op
-CollectionContains.stack_multiple                     1  10000000  avgt    5     3.780 ±    0.768  us/op
-CollectionContains.stack_multiple                100000  10000000  avgt    5   694.080 ± 4999.220  us/op
-CollectionContains.stack_single_exists                1        10  avgt    5     1.051 ±    0.016  us/op
-CollectionContains.stack_single_exists                1  10000000  avgt    5     3.502 ±    0.328  us/op
-CollectionContains.stack_single_exists           100000        10  avgt    5     1.025 ±    0.023  us/op
-CollectionContains.stack_single_exists           100000  10000000  avgt    5     3.984 ±    0.936  us/op
-CollectionContains.stack_single_missing               1        10  avgt    5     1.031 ±    0.040  us/op
-CollectionContains.stack_single_missing               1  10000000  avgt    5     3.644 ±    0.831  us/op
-CollectionContains.stack_single_missing          100000        10  avgt    5     1.028 ±    0.024  us/op
-CollectionContains.stack_single_missing          100000  10000000  avgt    5     3.856 ±    1.344  us/op
-CollectionContains.treeSet_multiple                   1        10  avgt    5     1.027 ±    0.033  us/op
-CollectionContains.treeSet_multiple                   1  10000000  avgt    5     4.605 ±    1.350  us/op
-CollectionContains.treeSet_multiple              100000  10000000  avgt    5    28.314 ±    9.557  us/op
-CollectionContains.treeSet_single_exists              1        10  avgt    5     0.988 ±    0.037  us/op
-CollectionContains.treeSet_single_exists              1  10000000  avgt    5     4.486 ±    0.709  us/op
-CollectionContains.treeSet_single_exists         100000        10  avgt    5     1.015 ±    0.027  us/op
-CollectionContains.treeSet_single_exists         100000  10000000  avgt    5     4.967 ±    1.208  us/op
-CollectionContains.treeSet_single_missing             1        10  avgt    5     1.027 ±    0.028  us/op
-CollectionContains.treeSet_single_missing             1  10000000  avgt    5     4.542 ±    0.926  us/op
-CollectionContains.treeSet_single_missing        100000        10  avgt    5     1.017 ±    0.015  us/op
-CollectionContains.treeSet_single_missing        100000  10000000  avgt    5     4.874 ±    0.914  us/op
+Benchmark                                         (M)        (N)  Mode  Cnt   Score    Error  Units
+CollectionContains.arrayList_single_exists       1000  100000000  avgt    5   3.590 ±  0.962  us/op
+CollectionContains.hashSet_single_exists         1000  100000000  avgt    5   5.378 ±  2.614  us/op
+CollectionContains.linkedHashSet_single_exists   1000  100000000  avgt    5   7.836 ± 12.144  us/op
+CollectionContains.stack_single_exists           1000  100000000  avgt    5   3.506 ±  0.958  us/op
+CollectionContains.treeSet_single_exists         1000  100000000  avgt    5   5.112 ±  3.650  us/op
+
+CollectionContains.arrayList_single_missing      1000  100000000  avgt    5   3.772 ±  1.436  us/op
+CollectionContains.hashSet_single_missing        1000  100000000  avgt    5   6.258 ±  9.275  us/op
+CollectionContains.linkedHashSet_single_missing  1000  100000000  avgt    5   5.238 ±  2.762  us/op
+CollectionContains.stack_single_missing          1000  100000000  avgt    5   3.883 ±  2.001  us/op
+CollectionContains.treeSet_single_missing        1000  100000000  avgt    5   4.959 ±  3.696  us/op
+
+CollectionContains.arrayList_multiple            1000  100000000  avgt    5  35.591 ± 35.250  us/op
+CollectionContains.hashSet_multiple              1000  100000000  avgt    5  69.646 ± 70.235  us/op
+CollectionContains.linkedHashSet_multiple        1000  100000000  avgt    5  67.089 ± 38.233  us/op
+CollectionContains.stack_multiple                1000  100000000  avgt    5  33.482 ± 39.999  us/op
+CollectionContains.treeSet_multiple              1000  100000000  avgt    5  39.097 ± 39.287  us/op
  */
 public class CollectionContains {
 
-    @Param({"10", "10000000"})
+    @Param({"100000000"})
     private int N;
 
-    @Param({"1", "100000"})
+    @Param({"1000"})
     private int M;
 
     private String[] checks;
@@ -82,6 +55,7 @@ public class CollectionContains {
     private String singleCheckMissing;
 
     private Stack<String> stack;
+    private List<String> arrayList;
     private Set<String> hashSet;
     private Set<String> treeSet;
     private Set<String> linkedHashSet;
@@ -109,6 +83,7 @@ public class CollectionContains {
     @Setup(Level.Invocation)
     public void setup() {
         stack = new Stack<>();
+        arrayList = new ArrayList<>();
         hashSet = new HashSet<>();
         treeSet = new TreeSet<>();
         linkedHashSet = new LinkedHashSet<>();
@@ -138,6 +113,25 @@ public class CollectionContains {
         boolean b = false; // dummy
         for (int i = 0; i < M; i++) {
             b = stack.contains(checks[i]);
+        }
+        bh.consume(b);
+    }
+
+    @Benchmark
+    public void arrayList_single_exists(Blackhole bh) {
+        bh.consume(arrayList.contains(singleCheckExists));
+    }
+
+    @Benchmark
+    public void arrayList_single_missing(Blackhole bh) {
+        bh.consume(arrayList.contains(singleCheckMissing));
+    }
+
+    @Benchmark
+    public void arrayList_multiple(Blackhole bh) {
+        boolean b = false; // dummy
+        for (int i = 0; i < M; i++) {
+            b = arrayList.contains(checks[i]);
         }
         bh.consume(b);
     }
