@@ -15,10 +15,15 @@ import java.util.concurrent.TimeUnit;
 @State(Scope.Benchmark)
 @Fork(value = 2, jvmArgs = {"-Xms4G", "-Xmx40G"})
 @Warmup(iterations = 3)
-@Measurement(iterations = 5)
+@Measurement(iterations = 10)
+/*
+Benchmark                (N)  Mode  Cnt    Score    Error  Units
+SpaceDandy.insertion      10  avgt    5    0.003 ±  0.001  us/op
+SpaceDandy.insertion  100000  avgt    5  107.817 ±  2.213  us/op
+ */
 public class SpaceDandy {
 
-    @Param({"10", "100000"})
+    @Param({"100", "100000", "1000000000"})
     private int N;
 
     private int[] arr;
