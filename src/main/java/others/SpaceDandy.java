@@ -39,7 +39,7 @@ public class SpaceDandy {
     }
 
     @Setup(Level.Trial)
-    // Cannot use Level.Invocation unless benchmark is suitably complex, else will saturate througput
+    // Cannot use Level.Invocation unless benchmark is suitably complex, else will saturate throughput
     public void setup() {
         arr = ThreadLocalRandom.current().ints().limit(N).toArray();
     }
