@@ -17,7 +17,7 @@ import java.util.stream.IntStream;
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @State(Scope.Benchmark)
-@Fork(value = 2, jvmArgs = {"-Xms4G", "-Xmx56G"})
+@Fork(value = 2, jvmArgs = {"-Xms50G", "-Xmx60G"})
 @Warmup(iterations = 3)
 @Measurement(iterations = 5)
 
@@ -40,13 +40,32 @@ CollectionContains.hashSet_multiple              1000  100000000  avgt    5  69.
 CollectionContains.linkedHashSet_multiple        1000  100000000  avgt    5  67.089 ± 38.233  us/op
 CollectionContains.stack_multiple                1000  100000000  avgt    5  33.482 ± 39.999  us/op
 CollectionContains.treeSet_multiple              1000  100000000  avgt    5  39.097 ± 39.287  us/op
+
+Benchmark                                            (M)        (N)  Mode  Cnt      Score      Error  Units
+CollectionContains.arrayList_single_exists       1000000  100000000  avgt    5      4.931 ±    1.493  us/op
+CollectionContains.hashSet_single_exists         1000000  100000000  avgt    5      6.328 ±    2.054  us/op
+CollectionContains.linkedHashSet_single_exists   1000000  100000000  avgt    5      6.132 ±    1.829  us/op
+CollectionContains.stack_single_exists           1000000  100000000  avgt    5      4.553 ±    2.096  us/op
+CollectionContains.treeSet_single_exists         1000000  100000000  avgt    5      6.076 ±    3.873  us/op
+
+CollectionContains.arrayList_single_missing      1000000  100000000  avgt    5      5.001 ±    3.838  us/op
+CollectionContains.hashSet_single_missing        1000000  100000000  avgt    5      8.535 ±   15.291  us/op
+CollectionContains.linkedHashSet_single_missing  1000000  100000000  avgt    5      6.425 ±    1.658  us/op
+CollectionContains.stack_single_missing          1000000  100000000  avgt    5      4.833 ±    2.518  us/op
+CollectionContains.treeSet_single_missing        1000000  100000000  avgt    5      5.071 ±    2.254  us/op
+
+CollectionContains.arrayList_multiple            1000000  100000000  avgt    5    293.711 ±   25.025  us/op
+CollectionContains.hashSet_multiple              1000000  100000000  avgt    5  91242.225 ± 5235.116  us/op
+CollectionContains.linkedHashSet_multiple        1000000  100000000  avgt    5  97421.753 ± 7467.232  us/op
+CollectionContains.stack_multiple                1000000  100000000  avgt    5   1269.770 ±   12.870  us/op
+CollectionContains.treeSet_multiple              1000000  100000000  avgt    5    295.932 ±   31.529  us/op
  */
 public class CollectionContains {
 
     @Param({"100000000"})
     private int N;
 
-    @Param({"1000"})
+    @Param({"1000000"})
     private int M;
 
     private String[] checks;
