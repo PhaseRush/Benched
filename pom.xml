@@ -9,8 +9,8 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <jmh.version>1.24</jmh.version>
-        <maven.compiler.release>12</maven.compiler.release>
+        <jmh.version>1.32</jmh.version>
+        <maven.compiler.release>16</maven.compiler.release>
     </properties>
 
     <repositories>
@@ -98,7 +98,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>
                 <configuration>
-                    <release>12</release>
+                    <release>16</release>
                 </configuration>
             </plugin>
         </plugins>
