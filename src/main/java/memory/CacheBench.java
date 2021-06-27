@@ -4,19 +4,24 @@ import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
-import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 import java.util.concurrent.TimeUnit;
 
-@BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.NANOSECONDS)
 @State(Scope.Benchmark)
-@Fork(value = 2, jvmArgs = {"-Xms2G", "-Xmx2G"})
-@Warmup(iterations = 3)
-@Measurement(iterations = 5)
 
 /*
+Ryzen 7 5800x DDR4 C18 1T
+Benchmark                    (N)  Mode  Cnt       Score      Error  Units
+CacheBench.columnMajorSum     10  avgt    5       0.039 ±    0.001  us/op
+CacheBench.columnMajorSum    100  avgt    5       3.154 ±    0.012  us/op
+CacheBench.columnMajorSum   1000  avgt    5     958.767 ±    7.110  us/op
+CacheBench.columnMajorSum  10000  avgt    5  596847.942 ± 9710.131  us/op
+CacheBench.rowMajorSum        10  avgt    5       0.022 ±    0.001  us/op
+CacheBench.rowMajorSum       100  avgt    5       2.070 ±    0.005  us/op
+CacheBench.rowMajorSum      1000  avgt    5     208.441 ±    0.390  us/op
+CacheBench.rowMajorSum     10000  avgt    5   31717.749 ±  899.836  us/op
+
  * Ryzen 5 3600 @ 4100Mhz, DDR4 3800MHz CL 16 1T
  * Benchmark                    (N)  Mode  Cnt     Score    Error  Units
  * CacheBench.columnMajorSum  10000  avgt    5  1245.935 ± 37.960  ms/op
@@ -39,19 +44,21 @@ import java.util.concurrent.TimeUnit;
  */
 public class CacheBench {
 
-    @Param({"10"})
+    @Param({"10", "100", "1000", "10000"})
     private int N;
 
     private long[][] matrix;
 
     public static void main(String[] args) throws RunnerException {
-
-        Options opt = new OptionsBuilder()
+        new Runner(new OptionsBuilder()
                 .include(CacheBench.class.getSimpleName())
                 .forks(1)
-                .build();
-
-        new Runner(opt).run();
+                .mode(Mode.AverageTime)
+                .timeUnit(TimeUnit.MICROSECONDS)
+                .jvmArgs("-Xmx64G")
+                .warmupIterations(3)
+                .measurementIterations(5)
+                .build()).run();
     }
 
     @Setup
