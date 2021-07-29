@@ -8,6 +8,13 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 import java.util.concurrent.TimeUnit;
 
+/*
+Benchmark                           (N)  Mode  Cnt  Score   Error  Units
+ExceptionBench.nullCheck       10000000  avgt    5  0.466 ± 0.007  ns/op
+ExceptionBench.nullException   10000000  avgt    5  2.235 ± 0.169  ns/op
+ExceptionBench.rangeCheck      10000000  avgt    5  0.460 ± 0.132  ns/op
+ExceptionBench.rangeException  10000000  avgt    5  2.441 ± 0.104  ns/op
+ */
 @State(Scope.Benchmark)
 public class ExceptionBench {
     @Param({"10000000"})
