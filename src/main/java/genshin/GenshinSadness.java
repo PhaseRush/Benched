@@ -110,6 +110,7 @@ public class GenshinSadness {
                 }).filter(Objects::nonNull)
                 .reduce(Integer::sum)
                 .orElse(0);
+
         int promoSum = promoResults.parallelStream().map(integerFuture -> {
                     try {
                         return integerFuture.get();
@@ -150,6 +151,7 @@ public class GenshinSadness {
                 }
                 return acc;
             });
+
             promoWishTasks.add(() -> {
                 int acc = 0;
                 for (int m = 0; m < M; m++) {
