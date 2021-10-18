@@ -11,12 +11,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
-@BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.SECONDS)
 @State(Scope.Benchmark)
-@Fork(value = 2, jvmArgs = {"-Xms16G", "-Xmx16G"})
-@Warmup(iterations = 3)
-@Measurement(iterations = 5)
 
 /*
 Benchmark                            (N)  Mode  Cnt      Score      Error  Units
@@ -38,8 +33,13 @@ public class SumBench {
     public static void main(String[] args) throws RunnerException {
         new Runner(new OptionsBuilder()
                 .include(SumBench.class.getSimpleName())
-                .build())
-                .run();
+                .forks(1)
+                .mode(Mode.AverageTime)
+                .timeUnit(TimeUnit.MICROSECONDS)
+                .jvmArgs("-Xmx64G")
+                .warmupIterations(3)
+                .measurementIterations(5)
+                .build()).run();
     }
 
     @Setup()
