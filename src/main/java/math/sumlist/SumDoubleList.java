@@ -79,31 +79,31 @@ public class SumDoubleList {
         list = ThreadLocalRandom.current().doubles(N).boxed().collect(Collectors.toList());
     }
 
-//    @Benchmark
-//    public void summingCollectorDouble(Blackhole bh) {
-//        //noinspection SimplifyStreamApiCallChains
-//        double sum = list.stream().collect(Collectors.summingDouble(i -> i));
-//        bh.consume(sum);
-//    }
-//
-//    @Benchmark
-//    public void summingCollectorDoubleParallel(Blackhole bh) {
-//        //noinspection SimplifyStreamApiCallChains
-//        double sum = list.parallelStream().collect(Collectors.summingDouble(i -> i));
-//        bh.consume(sum);
-//    }
-//
-//    @Benchmark
-//    public void mapToDoubleSum(Blackhole bh) {
-//        double sum = list.stream().mapToDouble(Double::doubleValue).sum();
-//        bh.consume(sum);
-//    }
-//
-//    @Benchmark
-//    public void mapToDoubleSumParallel(Blackhole bh) {
-//        double sum = list.parallelStream().mapToDouble(Double::doubleValue).sum();
-//        bh.consume(sum);
-//    }
+    @Benchmark
+    public void summingCollectorDouble(Blackhole bh) {
+        //noinspection SimplifyStreamApiCallChains
+        double sum = list.stream().collect(Collectors.summingDouble(i -> i));
+        bh.consume(sum);
+    }
+
+    @Benchmark
+    public void summingCollectorDoubleParallel(Blackhole bh) {
+        //noinspection SimplifyStreamApiCallChains
+        double sum = list.parallelStream().collect(Collectors.summingDouble(i -> i));
+        bh.consume(sum);
+    }
+
+    @Benchmark
+    public void mapToDoubleSum(Blackhole bh) {
+        double sum = list.stream().mapToDouble(Double::doubleValue).sum();
+        bh.consume(sum);
+    }
+
+    @Benchmark
+    public void mapToDoubleSumParallel(Blackhole bh) {
+        double sum = list.parallelStream().mapToDouble(Double::doubleValue).sum();
+        bh.consume(sum);
+    }
 
     @Benchmark
     public void mapToDoubleSum_prim(Blackhole bh) {
@@ -116,32 +116,32 @@ public class SumDoubleList {
         double sum = list.parallelStream().mapToDouble(i -> i).sum();
         bh.consume(sum);
     }
-//
-//    @Benchmark
-//    public void doubleAdder(Blackhole bh) {
-//        DoubleAdder a = new DoubleAdder();
-//        list.parallelStream().forEach(a::add);
-//        bh.consume(a.doubleValue());
-//    }
-//
-//    @Benchmark
-//    public void reduceSumDouble(Blackhole bh) {
-//        double sum = list.stream().reduce(0.0, Double::sum);
-//        bh.consume(sum);
-//    }
-//
-//    @Benchmark
-//    public void reduceSumDoubleParallel(Blackhole bh) {
-//        double sum = list.parallelStream().reduce(0.0, Double::sum);
-//        bh.consume(sum);
-//    }
-//
-//    @Benchmark
-//    public void forLoop(Blackhole bh) {
-//        double sum = 0;
-//        for (double num : list) {
-//            sum += num;
-//        }
-//        bh.consume(sum);
-//    }
+
+    @Benchmark
+    public void doubleAdder(Blackhole bh) {
+        DoubleAdder a = new DoubleAdder();
+        list.parallelStream().forEach(a::add);
+        bh.consume(a.doubleValue());
+    }
+
+    @Benchmark
+    public void reduceSumDouble(Blackhole bh) {
+        double sum = list.stream().reduce(0.0, Double::sum);
+        bh.consume(sum);
+    }
+
+    @Benchmark
+    public void reduceSumDoubleParallel(Blackhole bh) {
+        double sum = list.parallelStream().reduce(0.0, Double::sum);
+        bh.consume(sum);
+    }
+
+    @Benchmark
+    public void forLoop(Blackhole bh) {
+        double sum = 0;
+        for (double num : list) {
+            sum += num;
+        }
+        bh.consume(sum);
+    }
 }
