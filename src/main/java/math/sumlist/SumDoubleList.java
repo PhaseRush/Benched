@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 /*
 5800x @ 4.8 Ghz
 96 GB DDR4 @ 3600 - 18 22 22 42 83 1T
+L123 cache = 512 kib + 4 mib + 32 mib
 
 Benchmark                                          (N)  Mode  Cnt      Score     Error  Units
 SumDoubleList.doubleAdder                           10  avgt   10      7.707 ±   0.054  us/op thrpt    129752
