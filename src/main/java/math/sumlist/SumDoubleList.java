@@ -59,9 +59,9 @@ SumDoubleList.mapToDoubleSum_prim             10000000  avgt   10  35583.247 ± 
 SumDoubleList.mapToDoubleSumParallel          10000000  avgt   10   9088.552 ±  50.270    7246.922  ±  11.496
 SumDoubleList.mapToDoubleSumParallel_prim     10000000  avgt   10   9015.092 ±  35.103    7202.466  ±   8.949
 SumDoubleList.reduceSumDouble                 10000000  avgt   10  29879.475 ± 681.953   29835.707  ± 106.342
-SumDoubleList.reduceSumDoubleParallel         10000000  avgt   10  22424.702 ±  50.526   22112.735 ±   18.310
-SumDoubleList.summingCollectorDouble          10000000  avgt   10  46174.827 ± 108.088   45315.357 ±  375.390
-SumDoubleList.summingCollectorDoubleParallel  10000000  avgt   10   9100.338 ±  56.239    7275.261 ±   93.681
+SumDoubleList.reduceSumDoubleParallel         10000000  avgt   10  22424.702 ±  50.526   22112.735  ±  18.310
+SumDoubleList.summingCollectorDouble          10000000  avgt   10  46174.827 ± 108.088   45315.357  ± 375.390
+SumDoubleList.summingCollectorDoubleParallel  10000000  avgt   10   9100.338 ±  56.239    7275.261  ±  93.681
  */
 @State(Scope.Benchmark)
 public class SumDoubleList {
