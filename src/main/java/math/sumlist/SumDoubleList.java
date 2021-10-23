@@ -12,47 +12,56 @@ import java.util.concurrent.atomic.DoubleAdder;
 import java.util.stream.Collectors;
 
 /**
- * Credit goes to itsHobbes https://gist.github.com/itsHobbes/87cbf4ffce197136b6558d5d96ddfc30
+ * Credit goes to itsHobbes for inspiring this benchmark https://gist.github.com/itsHobbes/87cbf4ffce197136b6558d5d96ddfc30
+ * Credit goes to tp99 for lending me a 5950x test rig
  */
 /*
+
+Config 1
 5800x @ 4.8 Ghz
 96 GB DDR4 @ 3600 - 18 22 22 42 83 1T
 L123 cache = 512 kib + 4 mib + 32 mib
 
+Config 2 (Thanks to tp99)
+5950x @ 4.9 Ghz
+96 GB DDR4 @ 3600 - 18 22 xx xx xx 1T
+L123 cache = 1 mib + 8 mib + 64 mib
 
-Benchmark                                          (N)  Mode  Cnt      Score     Error  Units     thrpt
-SumDoubleList.doubleAdder                           10  avgt   10      7.707 ±   0.054  us/op    129752
-SumDoubleList.forLoop                               10  avgt   10      0.006 ±   0.001  us/op 166666666
-SumDoubleList.mapToDoubleSum                        10  avgt   10      0.058 ±   0.001  us/op  17241379
-SumDoubleList.mapToDoubleSum_prim                   10  avgt   10      0.057 ±   0.001  us/op
-SumDoubleList.mapToDoubleSumParallel                10  avgt   10      8.260 ±   0.032  us/op    121065
-SumDoubleList.mapToDoubleSumParallel_prim           10  avgt   10      8.266 ±   0.030  us/op
-SumDoubleList.reduceSumDouble                       10  avgt   10      0.056 ±   0.001  us/op  17857142
-SumDoubleList.reduceSumDoubleParallel               10  avgt   10      8.117 ±   0.035  us/op    123198
-SumDoubleList.summingCollectorDouble                10  avgt   10      0.064 ±   0.001  us/op  15625000
-SumDoubleList.summingCollectorDoubleParallel        10  avgt   10      8.427 ±   0.037  us/op    118666
+                                                                          Config 1                Config 2
+                                                                       ---------------       ----------------
+Benchmark                                          (N)  Mode  Cnt      us/op     Error       us/op      Error
+SumDoubleList.doubleAdder                           10  avgt   10      7.707 ±   0.054       5.551  ±   0.034
+SumDoubleList.forLoop                               10  avgt   10      0.006 ±   0.001       0.006  ±   0.001
+SumDoubleList.mapToDoubleSum                        10  avgt   10      0.058 ±   0.001       0.057  ±   0.001
+SumDoubleList.mapToDoubleSum_prim                   10  avgt   10      0.057 ±   0.001       0.057  ±   0.001
+SumDoubleList.mapToDoubleSumParallel                10  avgt   10      8.260 ±   0.032       5.642  ±   0.04
+SumDoubleList.mapToDoubleSumParallel_prim           10  avgt   10      8.266 ±   0.030       5.637  ±   0.062
+SumDoubleList.reduceSumDouble                       10  avgt   10      0.056 ±   0.001       0.054  ±   0.001
+SumDoubleList.reduceSumDoubleParallel               10  avgt   10      8.117 ±   0.035       5.590  ±   0.031
+SumDoubleList.summingCollectorDouble                10  avgt   10      0.064 ±   0.001       0.063  ±   0.001
+SumDoubleList.summingCollectorDoubleParallel        10  avgt   10      8.427 ±   0.037       5.879  ±   0.013
 
-SumDoubleList.doubleAdder                        10000  avgt   10     29.342 ±   0.086  us/op     34080
-SumDoubleList.forLoop                            10000  avgt   10      6.269 ±   0.012  us/op    159515
-SumDoubleList.mapToDoubleSum                     10000  avgt   10     34.673 ±   0.118  us/op     28840
-SumDoubleList.mapToDoubleSum_prim                10000  avgt   10     34.679 ±   0.098  us/op
-SumDoubleList.mapToDoubleSumParallel             10000  avgt   10     23.542 ±   0.079  us/op     42477
-SumDoubleList.mapToDoubleSumParallel_prim        10000  avgt   10     23.367 ±   0.062  us/op
-SumDoubleList.reduceSumDouble                    10000  avgt   10     29.108 ±   0.106  us/op     34354
-SumDoubleList.reduceSumDoubleParallel            10000  avgt   10     27.122 ±   0.155  us/op     36870
-SumDoubleList.summingCollectorDouble             10000  avgt   10     44.166 ±   0.095  us/op     22641
-SumDoubleList.summingCollectorDoubleParallel     10000  avgt   10     24.545 ±   0.070  us/op     40741
+SumDoubleList.doubleAdder                        10000  avgt   10     29.342 ±   0.086      35.012  ±   0.131
+SumDoubleList.forLoop                            10000  avgt   10      6.269 ±   0.012       6.217  ±   0.052
+SumDoubleList.mapToDoubleSum                     10000  avgt   10     34.673 ±   0.118      33.850  ±   0.104
+SumDoubleList.mapToDoubleSum_prim                10000  avgt   10     34.679 ±   0.098      20.081  ±   0.037
+SumDoubleList.mapToDoubleSumParallel             10000  avgt   10     23.542 ±   0.079      33.759  ±   0.075
+SumDoubleList.mapToDoubleSumParallel_prim        10000  avgt   10     23.367 ±   0.062      19.959  ±   0.031
+SumDoubleList.reduceSumDouble                    10000  avgt   10     29.108 ±   0.106      29.152  ±   0.053
+SumDoubleList.reduceSumDoubleParallel            10000  avgt   10     27.122 ±   0.155      26.381  ±   0.045
+SumDoubleList.summingCollectorDouble             10000  avgt   10     44.166 ±   0.095      43.336  ±   0.095
+SumDoubleList.summingCollectorDoubleParallel     10000  avgt   10     24.545 ±   0.070      20.912  ±   0.050
 
-SumDoubleList.doubleAdder                     10000000  avgt   10   9100.749 ±  42.132  us/op       109
-SumDoubleList.forLoop                         10000000  avgt   10  10917.227 ± 131.071  us/op        91
-SumDoubleList.mapToDoubleSum                  10000000  avgt   10  35588.848 ±  49.988  us/op        28
-SumDoubleList.mapToDoubleSum_prim             10000000  avgt   10  35583.247 ± 225.742  us/op
-SumDoubleList.mapToDoubleSumParallel          10000000  avgt   10   9088.552 ±  50.270  us/op       110
-SumDoubleList.mapToDoubleSumParallel_prim     10000000  avgt   10   9015.092 ±  35.103  us/op
-SumDoubleList.reduceSumDouble                 10000000  avgt   10  29879.475 ± 681.953  us/op        33
-SumDoubleList.reduceSumDoubleParallel         10000000  avgt   10  22424.702 ±  50.526  us/op        44
-SumDoubleList.summingCollectorDouble          10000000  avgt   10  46174.827 ± 108.088  us/op        21
-SumDoubleList.summingCollectorDoubleParallel  10000000  avgt   10   9100.338 ±  56.239  us/op       109
+SumDoubleList.doubleAdder                     10000000  avgt   10   9100.749 ±  42.132    7247.295  ±  20.757
+SumDoubleList.forLoop                         10000000  avgt   10  10917.227 ± 131.071   10899.721  ± 114.039
+SumDoubleList.mapToDoubleSum                  10000000  avgt   10  35588.848 ±  49.988   35498.336  ±  87.104
+SumDoubleList.mapToDoubleSum_prim             10000000  avgt   10  35583.247 ± 225.742    7246.922  ±  11.496
+SumDoubleList.mapToDoubleSumParallel          10000000  avgt   10   9088.552 ±  50.270    7246.922  ±  11.496
+SumDoubleList.mapToDoubleSumParallel_prim     10000000  avgt   10   9015.092 ±  35.103    7202.466  ±   8.949
+SumDoubleList.reduceSumDouble                 10000000  avgt   10  29879.475 ± 681.953   29835.707  ± 106.342
+SumDoubleList.reduceSumDoubleParallel         10000000  avgt   10  22424.702 ±  50.526   22112.735 ±   18.310
+SumDoubleList.summingCollectorDouble          10000000  avgt   10  46174.827 ± 108.088   45315.357 ±  375.390
+SumDoubleList.summingCollectorDoubleParallel  10000000  avgt   10   9100.338 ±  56.239    7275.261 ±   93.681
  */
 @State(Scope.Benchmark)
 public class SumDoubleList {
