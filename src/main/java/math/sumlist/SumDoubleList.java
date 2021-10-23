@@ -12,8 +12,8 @@ import java.util.concurrent.atomic.DoubleAdder;
 import java.util.stream.Collectors;
 
 /**
- * Credit goes to itsHobbes for inspiring this benchmark https://gist.github.com/itsHobbes/87cbf4ffce197136b6558d5d96ddfc30
- * Credit goes to tp99 for lending me a 5950x test rig
+ * @see <a href="https://gist.github.com/itsHobbes/87cbf4ffce197136b6558d5d96ddfc30">itsHobbes for inspiring the original benchmark</a>
+ * <p>Credit goes to tp99 for lending me a 5950x test rig</p>
  */
 /*
 
@@ -24,7 +24,7 @@ L123 cache = 512 kib + 4 mib + 32 mib
 
 Config 2 (Thanks to tp99)
 5950x @ 4.9 Ghz
-96 GB DDR4 @ 3600 - 18 22 xx xx xx 1T
+96 GB DDR4 @ 3600 - 18 22 22 42 83 1T
 L123 cache = 1 mib + 8 mib + 64 mib
 
                                                                           Config 1                Config 2
