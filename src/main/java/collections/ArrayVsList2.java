@@ -23,10 +23,10 @@ import java.util.stream.Stream;
 /*
 Benchmark                              (N)  Mode  Cnt         Score        Error  Units
 CollectionBench.array_listFor           25  avgt    5       104.498 ±      1.904  ns/op
-CollectionBench.array_loopWhile         25  avgt    5       107.971 ±      1.135  ns/op
-CollectionBench.array_replace           25  avgt    5        42.050 ±      1.270  ns/op
 CollectionBench.list_loopFor            25  avgt    5       162.450 ±      1.338  ns/op
+CollectionBench.array_loopWhile         25  avgt    5       107.971 ±      1.135  ns/op
 CollectionBench.list_loopWhile          25  avgt    5       118.241 ±      4.213  ns/op
+CollectionBench.array_replace           25  avgt    5        42.050 ±      1.270  ns/op
 CollectionBench.list_replace            25  avgt    5        77.353 ±      1.457  ns/op
 CollectionBench.sum_even_loop_array     25  avgt    5       145.000 ±      2.605  ns/op
 CollectionBench.sum_even_loop_list      25  avgt    5       169.395 ±      6.059  ns/op
@@ -147,3 +147,4 @@ public class ArrayVsList2 {
         return Stream.iterate("a", a -> a + a).limit(N).toArray(String[]::new);
     }
 }
+
