@@ -11,19 +11,20 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.NANOSECONDS)
+@OutputTimeUnit(TimeUnit.MILLISECONDS)
 @State(Scope.Benchmark)
 @Fork(value = 2, jvmArgs = {"-Xms6G", "-Xmx6G"})
 @Warmup(iterations = 3)
 @Measurement(iterations = 5)
 
 /*
- * Benchmark                     (N)  Mode  Cnt     Score     Error  Units
- * StringBench.stringBuffer   100000  avgt    5     1.232 ±   0.030  ms/op
- * StringBench.stringBuilder  100000  avgt    5     0.950 ±   0.048  ms/op
- * StringBench.stringConcat   100000  avgt    5  8616.315 ± 235.166  ms/op
- * StringBench.stringRepeat   100000  avgt    5     0.163 ±   0.004  ms/op
- * StringBench.streamReduce   100000  avgt    5  6599.168 ± 249.764  ms/op
+Benchmark                            (N)  Mode  Cnt      Score     Error  Units
+StringBench.stringConcat          100000  avgt    5  11726.334 ± 463.696  ms/op
+StringBench.stringBuffer          100000  avgt    5      1.084 ±   0.005  ms/op
+StringBench.stringBuilder         100000  avgt    5      0.899 ±   0.022  ms/op
+StringBench.streamReduce          100000  avgt    5  12047.313 ±  26.258  ms/op
+StringBench.parallelStreamReduce  100000  avgt    5    112.556 ±   5.038  ms/op
+StringBench.stringRepeat          100000  avgt    5      0.178 ±   0.001  ms/op
  */
 public class StringBench {
 
@@ -82,5 +83,9 @@ public class StringBench {
     @Benchmark
     public void streamReduce(Blackhole bh) {
         bh.consume(IntStream.range(0, N).mapToObj(i -> unit).reduce(String::concat));
+    }
+    @Benchmark
+    public void parallelStreamReduce(Blackhole bh) {
+        bh.consume(IntStream.range(0, N).parallel().mapToObj(i -> unit).reduce(String::concat));
     }
 }
