@@ -1,7 +1,5 @@
 package collections;
 
-import com.koloboke.collect.map.hash.HashIntIntMap;
-import com.koloboke.collect.map.hash.HashIntIntMaps;
 import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
@@ -44,9 +42,6 @@ public class HashMaps {
 
     private Int2IntOpenHashMap fastutilPrimitiveHashMap;
 
-    private HashIntIntMap kolobokePrimitiveHashMap;
-    private HashIntIntMap kolobokeImmutablePrimitiveHashMap;
-
     private IntIntHashMap eclipseGsPrimitiveHashMap;
     private MutableMap<Integer, Integer> eclipseGsMutableHashMap;
     private MutableMap<Integer, Integer> eclipseGsMutableConcurrentHashMap;
@@ -84,9 +79,6 @@ public class HashMaps {
         javaTreeMap = new TreeMap<>(freqMap);
 
         fastutilPrimitiveHashMap = new Int2IntOpenHashMap(freqMap);
-
-        kolobokeImmutablePrimitiveHashMap = HashIntIntMaps.newImmutableMap(freqMap);
-        kolobokePrimitiveHashMap = HashIntIntMaps.newImmutableMap(freqMap);
 
 //        eclipseGsHashMap = new com.gs.collections.impl.map.mutable.Concurrent<>();
         eclipseGsPrimitiveHashMap = new IntIntHashMap();
