@@ -18,6 +18,10 @@ import java.util.stream.IntStream;
 @Measurement(iterations = 5)
 
 /*
+Since this is a popular benchmark, you're probably here via a link.
+You can read up more about my benchmarks (including this one) here:
+https://www.phaserush.info/posts/benched
+
 Benchmark                            (N)  Mode  Cnt      Score     Error  Units
 StringBench.stringConcat          100000  avgt    5  11726.334 ± 463.696  ms/op
 StringBench.stringBuffer          100000  avgt    5      1.084 ±   0.005  ms/op
