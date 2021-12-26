@@ -72,7 +72,7 @@ public class MikeBlairPrimes {
         mike_sieve = mike_makeSieve(N);
     }
 
-    //
+
     @Benchmark
     public int genSieve() {
         var sieve = makeSieve(N);
@@ -84,44 +84,44 @@ public class MikeBlairPrimes {
         var sieve = mike_makeSieve(N);
         return sieve.length;
     }
-//
-//    @Benchmark
-//    public int pregen_sieve() {
-//        int numPrimes = 0;
-//        for (int i = 0; i < N; i++) {
-//            if (!sieve[i]) numPrimes++;
-//        }
-//        return numPrimes;
-//    }
-//
-//    @Benchmark
-//    public int genSeiveAndCount() {
-//        boolean[] sieve = makeSieve(N);
-//        int numPrimes = 0;
-//        for (int i = 0; i < N; i++) {
-//            if (!sieve[i]) numPrimes++;
-//        }
-//        return numPrimes;
-//    }
-//
-//    @Benchmark
-//    public int mike_pregen_sieve() {
-//        int numPrimes = 0;
-//        for (int i = 0; i < N; i++) {
-//            if (isPrime(i, mike_sieve)) numPrimes++;
-//        }
-//        return numPrimes;
-//    }
-//
-//    @Benchmark
-//    public int mike_genAndCount() {
-//        int[] mike_sieve = Sieve(N);
-//        int numPrimes = 0;
-//        for (int i = 0; i < N; i++) {
-//            if (isPrime(i, mike_sieve)) numPrimes++;
-//        }
-//        return numPrimes;
-//    }
+
+    @Benchmark
+    public int pregen_sieve() {
+        int numPrimes = 0;
+        for (int i = 0; i < N; i++) {
+            if (!sieve[i]) numPrimes++;
+        }
+        return numPrimes;
+    }
+
+    @Benchmark
+    public int genSeiveAndCount() {
+        boolean[] sieve = makeSieve(N);
+        int numPrimes = 0;
+        for (int i = 0; i < N; i++) {
+            if (!sieve[i]) numPrimes++;
+        }
+        return numPrimes;
+    }
+
+    @Benchmark
+    public int mike_pregen_sieve() {
+        int numPrimes = 0;
+        for (int i = 0; i < N; i++) {
+            if (isPrime(i, mike_sieve)) numPrimes++;
+        }
+        return numPrimes;
+    }
+
+    @Benchmark
+    public int mike_genAndCount() {
+        int[] mike_sieve = Sieve(N);
+        int numPrimes = 0;
+        for (int i = 0; i < N; i++) {
+            if (isPrime(i, mike_sieve)) numPrimes++;
+        }
+        return numPrimes;
+    }
 
     private static int[] mike_makeSieve(int max) {
         int upperRange = max - 1;
