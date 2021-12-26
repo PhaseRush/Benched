@@ -20,10 +20,10 @@ MikeBlairPrimes.mike_genSieve      1000000  avgt    5      3904.944 ±      30.5
 MikeBlairPrimes.genSieve           1000000  avgt    5      2321.352 ±      76.075  us/op
 
 MikeBlairPrimes.mike_genAndCount     10000  avgt    5      4284.334 ±     516.163  us/op
-MikeBlairPrimes.genSeiveAndCount     10000  avgt    5        17.709 ±       2.022  us/op
+MikeBlairPrimes.genSieveAndCount     10000  avgt    5        17.709 ±       2.022  us/op
 
 MikeBlairPrimes.mike_genAndCount   1000000  avgt    5  26219530.520 ± 1807184.113  us/op
-MikeBlairPrimes.genSeiveAndCount   1000000  avgt    5      2994.444 ±     109.792  us/op
+MikeBlairPrimes.genSieveAndCount   1000000  avgt    5      2994.444 ±     109.792  us/op
 
 MikeBlairPrimes.mike_pregen_sieve    10000  avgt    5      4001.394 ±      60.508  us/op
 MikeBlairPrimes.pregen_sieve         10000  avgt    5         2.322 ±       0.040  us/op
@@ -95,7 +95,7 @@ public class MikeBlairPrimes {
     }
 
     @Benchmark
-    public int genSeiveAndCount() {
+    public int genSieveAndCount() {
         boolean[] sieve = makeSieve(N);
         int numPrimes = 0;
         for (int i = 0; i < N; i++) {
@@ -115,7 +115,7 @@ public class MikeBlairPrimes {
 
     @Benchmark
     public int mike_genAndCount() {
-        int[] mike_sieve = Sieve(N);
+        int[] mike_sieve = mike_makeSieve(N);
         int numPrimes = 0;
         for (int i = 0; i < N; i++) {
             if (isPrime(i, mike_sieve)) numPrimes++;
