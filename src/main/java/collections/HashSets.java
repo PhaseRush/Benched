@@ -1,8 +1,5 @@
 package collections;
 
-import com.koloboke.collect.set.hash.HashIntSet;
-import com.koloboke.collect.set.hash.HashIntSetFactory;
-import com.koloboke.collect.set.hash.HashIntSets;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import it.unimi.dsi.fastutil.ints.IntSet;
 import org.openjdk.jmh.annotations.*;
@@ -46,7 +43,6 @@ public class HashSets {
     private Set<Integer> javaHashSet;
     private static HashSet<Integer> javaStaticHashSet;
     private IntSet fastUtilsHashSet;
-    private HashIntSet kolobokeHashSet;
 
 
     public static void main(String[] args) throws RunnerException {

@@ -32,7 +32,7 @@ FindMin.singleStream    100000000  avgt    5    2279.633 ±   142.910  ms/op
 FindMin.treeMap         100000000  avgt    5  257994.164 ± 25634.865  ms/op
  */
 public class FindMin {
-    @Param({"1000000", "100000000"})
+    @Param({"1000000"})
     int N;
 
     List<Integer> feeder;
@@ -67,23 +67,23 @@ public class FindMin {
 
     }
 
-    @Benchmark
-    public int baseline() {
-        int[] array = new int[N];
-        for (int i = 0; i < feeder.size(); i++) {
-            array[i] = feeder.get(i);
-        }
-        return array[0];
-    }
-
-    @Benchmark
-    public int forLoop() {
-        int min = feeder.get(0);
-        for (int i = 1; i < feeder.size(); i++) {
-            if (feeder.get(i) < min) min = feeder.get(i);
-        }
-        return min;
-    }
+//    @Benchmark
+//    public int baseline() {
+//        int[] array = new int[N];
+//        for (int i = 0; i < feeder.size(); i++) {
+//            array[i] = feeder.get(i);
+//        }
+//        return array[0];
+//    }
+//
+//    @Benchmark
+//    public int forLoop() {
+//        int min = feeder.get(0);
+//        for (int i = 1; i < feeder.size(); i++) {
+//            if (feeder.get(i) < min) min = feeder.get(i);
+//        }
+//        return min;
+//    }
 
     private int recursive_helper(int currMin, int currIdx) {
         if (currIdx == feeder.size()) return currMin;
@@ -97,31 +97,31 @@ public class FindMin {
         return recursive_helper(feeder.get(0), 1);
     }
 
-    @Benchmark
-    public int arrayList() {
-        arrayList = new ArrayList<>(N);
-        arrayList.addAll(feeder);
-        Collections.sort(arrayList);
-        return arrayList.get(0);
-    }
-
-    @Benchmark
-    public int treeMap() {
-        treeMap = new TreeMap<>();
-        for (Integer integer : feeder) {
-            treeMap.put(integer, 0);
-        }
-        return treeMap.firstKey();
-    }
-
-    @Benchmark
-    public int singleStream() {
-        return feeder.stream().min(Integer::compare).orElse(feeder.get(0));
-    }
-
-    @Benchmark
-    public int parallelStream() {
-        return feeder.stream().parallel().min(Integer::compare).orElse(feeder.get(0));
-    }
+//    @Benchmark
+//    public int arrayList() {
+//        arrayList = new ArrayList<>(N);
+//        arrayList.addAll(feeder);
+//        Collections.sort(arrayList);
+//        return arrayList.get(0);
+//    }
+//
+//    @Benchmark
+//    public int treeMap() {
+//        treeMap = new TreeMap<>();
+//        for (Integer integer : feeder) {
+//            treeMap.put(integer, 0);
+//        }
+//        return treeMap.firstKey();
+//    }
+//
+//    @Benchmark
+//    public int singleStream() {
+//        return feeder.stream().min(Integer::compare).orElse(feeder.get(0));
+//    }
+//
+//    @Benchmark
+//    public int parallelStream() {
+//        return feeder.stream().parallel().min(Integer::compare).orElse(feeder.get(0));
+//    }
 }
 

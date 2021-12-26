@@ -9,11 +9,12 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 import java.util.concurrent.TimeUnit;
 
 /*
-Benchmark                           (N)  Mode  Cnt  Score   Error  Units
-ExceptionBench.nullCheck       10000000  avgt    5  0.466 ± 0.007  ns/op
-ExceptionBench.nullException   10000000  avgt    5  2.235 ± 0.169  ns/op
-ExceptionBench.rangeCheck      10000000  avgt    5  0.460 ± 0.132  ns/op
-ExceptionBench.rangeException  10000000  avgt    5  2.441 ± 0.104  ns/op
+Benchmark                           (N)  Mode  Cnt    Score    Error  Units
+ExceptionBench.nullCheck       10000000  avgt    5    0.420 ±  0.002  ns/op
+ExceptionBench.nullException   10000000  avgt    5    2.176 ±  0.059  ns/op
+ExceptionBench.rangeCheck      10000000  avgt    5    0.422 ±  0.009  ns/op
+ExceptionBench.rangeException  10000000  avgt    5    2.242 ±  0.111  ns/op
+ExceptionBench.throwCustom     10000000  avgt    5  682.789 ± 27.814  ns/op
  */
 @State(Scope.Benchmark)
 public class ExceptionBench {
@@ -74,6 +75,21 @@ public class ExceptionBench {
             bh.consume(nullString.substring(1));
         } catch (NullPointerException e) {
             bh.consume(e);
+        }
+    }
+
+    @Benchmark
+    public void throwCustom(Blackhole bh) {
+        try {
+            throw new CustomException("");
+        } catch (CustomException e) {
+            bh.consume(e);
+        }
+    }
+
+    static class CustomException extends Exception {
+        CustomException(String error) {
+            super(error);
         }
     }
 
