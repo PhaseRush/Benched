@@ -61,57 +61,57 @@ public class ArrayListVsLinkedList {
         linkedList = IntStream.range(0, N).boxed().collect(Collectors.toCollection(LinkedList::new));
     }
 
-//    @Benchmark
-//    public void arrayList_add_tail() {
-//        arrayList = new ArrayList<>();
-//        for (int i = 0; i < feeder.length; i++) {
-//            arrayList.add(feeder[i]);
-//        }
-//    }
-//    @Benchmark
-//    public void arrayList_add_head() {
-//        arrayList = new ArrayList<>();
-//        for (int i = 0; i < feeder.length; i++) {
-//            arrayList.add(0,feeder[i]);
-//        }
-//    }
-//
-//    @Benchmark
-//    public void linkedList_add_tail() {
-//        linkedList = new LinkedList<>();
-//        for (int i = 0; i < feeder.length; i++) {
-//            linkedList.add(feeder[i]);
-//        }
-//    }
-//    @Benchmark
-//    public void linkedList_add_head() {
-//        linkedList = new LinkedList<>();
-//        for (int i = 0; i < feeder.length; i++) {
-//            linkedList.add(0,feeder[i]);
-//        }
-//    }
-//
-//
-//    @Benchmark
-//    public void arraylist_iter(Blackhole bh) {
-//        for (int i = 0; i < arrayList.size(); i++) {
-//            bh.consume(arrayList.get(i));
-//        }
-//    }
-//
-//    @Benchmark
-//    public void linkedlist_iter(Blackhole bh) {
-//        for (int i = 0; i < linkedList.size(); i++) {
-//            bh.consume(linkedList.get(i));
-//        }
-//    }
-//
-//    @Benchmark
-//    public void arraylist_get_rand(Blackhole bh) {
-//        for (int i = 0; i < feeder.length; i++) {
-//            bh.consume(arrayList.get(feeder[i]));
-//        }
-//    }
+    @Benchmark
+    public void arrayList_add_tail() {
+        arrayList = new ArrayList<>();
+        for (int i = 0; i < feeder.length; i++) {
+            arrayList.add(feeder[i]);
+        }
+    }
+    @Benchmark
+    public void arrayList_add_head() {
+        arrayList = new ArrayList<>();
+        for (int i = 0; i < feeder.length; i++) {
+            arrayList.add(0,feeder[i]);
+        }
+    }
+
+    @Benchmark
+    public void linkedList_add_tail() {
+        linkedList = new LinkedList<>();
+        for (int i = 0; i < feeder.length; i++) {
+            linkedList.add(feeder[i]);
+        }
+    }
+    @Benchmark
+    public void linkedList_add_head() {
+        linkedList = new LinkedList<>();
+        for (int i = 0; i < feeder.length; i++) {
+            linkedList.add(0,feeder[i]);
+        }
+    }
+
+
+    @Benchmark
+    public void arraylist_iter(Blackhole bh) {
+        for (int i = 0; i < arrayList.size(); i++) {
+            bh.consume(arrayList.get(i));
+        }
+    }
+
+    @Benchmark
+    public void linkedlist_iter(Blackhole bh) {
+        for (int i = 0; i < linkedList.size(); i++) {
+            bh.consume(linkedList.get(i));
+        }
+    }
+
+    @Benchmark
+    public void arraylist_get_rand(Blackhole bh) {
+        for (int i = 0; i < feeder.length; i++) {
+            bh.consume(arrayList.get(feeder[i]));
+        }
+    }
 
     @Benchmark
     public void linkedlist_get_rand(Blackhole bh) {
