@@ -6,6 +6,7 @@ import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -29,10 +30,11 @@ ArrayListVsLinkedList.linkedlist_get_rand      10  avgt    3        0.039 ±    
 ArrayListVsLinkedList.arraylist_get_rand   100000  avgt    3      766.206 ±    2118.611  us/op
 ArrayListVsLinkedList.linkedlist_get_rand  100000  avgt    3  2308676.153 ±  162439.800  us/op
 
-ArrayListVsLinkedList.arraylist_iter           10  avgt    3        0.079 ±       0.059  us/op
-ArrayListVsLinkedList.linkedlist_iter          10  avgt    3        0.117 ±       0.170  us/op
-ArrayListVsLinkedList.arraylist_iter       100000  avgt    3     1109.595 ±    5566.628  us/op
-ArrayListVsLinkedList.linkedlist_iter      100000  avgt    3  6894645.200 ± 8559869.752  us/op
+
+ArrayListVsLinkedList.arraylist_iter           10  avgt    3        0.031 ±       0.032  us/op
+ArrayListVsLinkedList.linkedlist_iter          10  avgt    3        0.033 ±       0.026  us/op
+ArrayListVsLinkedList.arraylist_iter       100000  avgt    3      271.849 ±     649.751  us/op
+ArrayListVsLinkedList.linkedlist_iter      100000  avgt    3      332.906 ±     849.021  us/op
  */
 public class ArrayListVsLinkedList {
     @Param({"10", "100000"})
@@ -94,15 +96,15 @@ public class ArrayListVsLinkedList {
 
     @Benchmark
     public void arraylist_iter(Blackhole bh) {
-        for (int i = 0; i < arrayList.size(); i++) {
-            bh.consume(arrayList.get(i));
+        for (Integer integer : arrayList) {
+            bh.consume(integer);
         }
     }
 
     @Benchmark
     public void linkedlist_iter(Blackhole bh) {
-        for (int i = 0; i < linkedList.size(); i++) {
-            bh.consume(linkedList.get(i));
+        for (Integer integer : linkedList) {
+            bh.consume(integer);
         }
     }
 
