@@ -13,8 +13,8 @@ import java.util.concurrent.TimeUnit;
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @State(Scope.Benchmark)
 @Fork(value = 2, jvmArgs = {"-Xms50G", "-Xmx50G"})
-@Warmup(iterations = 5)
-@Measurement(iterations = 5)
+@Warmup(iterations = 10)
+@Measurement(iterations = 420)
 /*
 Benchmark                         (N)  Mode  Cnt      Score     Error  Units
 ClearStringBuilder.delete           1  avgt   50      2.240 ±   0.011  ns/op
