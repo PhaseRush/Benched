@@ -10,23 +10,27 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 import java.util.concurrent.TimeUnit;
 
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.MICROSECONDS)
+@OutputTimeUnit(TimeUnit.NANOSECONDS)
 @State(Scope.Benchmark)
 @Fork(value = 2, jvmArgs = {"-Xms50G", "-Xmx50G"})
-@Warmup(iterations = 3)
+@Warmup(iterations = 5)
 @Measurement(iterations = 5)
 /*
-Benchmark                         (N)  Mode  Cnt  Score    Error  Units
-ClearStringBuilder.delete           1  avgt    5  0.027 ±  0.001  us/op
-ClearStringBuilder.delete     1000000  avgt    5  0.038 ±  0.004  us/op
-ClearStringBuilder.setLength        1  avgt    5  0.026 ±  0.001  us/op
-ClearStringBuilder.setLength  1000000  avgt    5  0.037 ±  0.001  us/op
+Benchmark                         (N)  Mode  Cnt      Score     Error  Units
+ClearStringBuilder.delete           1  avgt   50      2.240 ±   0.011  ns/op
+ClearStringBuilder.setLength        1  avgt   50      2.364 ±   0.011  ns/op
+ClearStringBuilder.createNew        1  avgt    5      4.212 ±   0.021  ns/op
+
+ClearStringBuilder.delete     1000000  avgt   50      2.235 ±   0.015  ns/op
+ClearStringBuilder.setLength  1000000  avgt   50      2.352 ±   0.002  ns/op
+ClearStringBuilder.createNew  1000000  avgt    5  54662.354 ± 203.577  ns/op
  */
 public class ClearStringBuilder {
 
     @Param({"1", "1000000"})
     int N;
-    StringBuilder sb;
+    StringBuilder sb1;
+    StringBuilder sb2;
 
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
@@ -37,19 +41,28 @@ public class ClearStringBuilder {
         new Runner(opt).run();
     }
 
-    @Setup(Level.Invocation)
+    @Setup
     public void setup() {
-        sb = new StringBuilder(N);
+        sb1 = new StringBuilder(N);
+        sb1.append("R".repeat(N));
+
+        sb2 = new StringBuilder(N);
+        sb2.append("R".repeat(N));
     }
 
     @Benchmark
     public void delete(Blackhole bh) {
-        bh.consume(sb.delete(0, sb.length()));
+        bh.consume(sb1.delete(0, N));
     }
 
     @Benchmark
     public void setLength(Blackhole bh) {
-        sb.setLength(0);
-        bh.consume(sb);
+        sb2.setLength(0);
+        bh.consume(sb2);
+    }
+
+    @Benchmark
+    public void createNew(Blackhole bh) {
+        bh.consume(new StringBuilder(N));
     }
 }
