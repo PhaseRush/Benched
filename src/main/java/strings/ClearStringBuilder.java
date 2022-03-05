@@ -16,14 +16,14 @@ import java.util.concurrent.TimeUnit;
 @Warmup(iterations = 10)
 @Measurement(iterations = 420)
 /*
-Benchmark                         (N)  Mode  Cnt      Score     Error  Units
-ClearStringBuilder.delete           1  avgt   50      2.240 ±   0.011  ns/op
-ClearStringBuilder.setLength        1  avgt   50      2.364 ±   0.011  ns/op
-ClearStringBuilder.createNew        1  avgt    5      4.212 ±   0.021  ns/op
+Benchmark                         (N)  Mode  Cnt      Score    Error  Units
+ClearStringBuilder.createNew        1  avgt  420      4.157 ±  0.002  ns/op
+ClearStringBuilder.delete           1  avgt  420      2.238 ±  0.001  ns/op
+ClearStringBuilder.setLength        1  avgt  420      2.372 ±  0.041  ns/op
 
-ClearStringBuilder.delete     1000000  avgt   50      2.235 ±   0.015  ns/op
-ClearStringBuilder.setLength  1000000  avgt   50      2.352 ±   0.002  ns/op
-ClearStringBuilder.createNew  1000000  avgt    5  54662.354 ± 203.577  ns/op
+ClearStringBuilder.createNew  1000000  avgt  420  57279.270 ± 29.107  ns/op
+ClearStringBuilder.delete     1000000  avgt  420      2.238 ±  0.002  ns/op
+ClearStringBuilder.setLength  1000000  avgt  420      2.380 ±  0.062  ns/op
  */
 public class ClearStringBuilder {
 
