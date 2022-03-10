@@ -1,26 +1,24 @@
 # Benched
 Java Benchmarks for the inquisitive.
 
-Check out my writeup for a selection of benchmarks [here](https://www.phaserush.info/posts/benched).
+Check out my writeup for a selection of benchmarks [on my website](https://www.phaserush.info/posts/benched).
+
+Need to settle a debate? Generally curious? Send your benchmark requests to [phaseansible+benchmarks@gmail.com](mailto:phaseansible+benchmarks@gmail.com)
+
+
+## Hardware Specs
 
 System specs (used for ALL benchmarks unless otherwise stated)
 
 The latest version of Windows 11 is always used. Once I get my homelab set up a bit better I'll also include linux benchmarks.
 
 Current Setup:
-CPU: \
-AMD Ryzen R7 5800x @ 4.8 GHz \
-FCLK: 1900 \
-UCLK: 1900
 
-
-RAM: \
-64 GB G.Skill Trident Z Neo, Hynix M-die, DDR4 3800 MHz \
-Tcas: 18 \
-Trcd: 22 \
-Trp:  22 \
-Tras: 42 \
-Trc:  64 
+| Component |Model| Specs                                             |
+|-----------|---|---------------------------------------------------|
+| CPU       |AMD Ryzen R7 5800x| 4.8 GHz, FCLK 1900, UCLK 1900                     |
+| RAM       |G.Skill Trident Z Neo| 64 GB, Hynix M-die, DDR4 3800 MHz, 18 22 22 42 64 |
+| Drive     |WD SN750||
 
 Setup used before 2020-11-15 \
 CPU: \
