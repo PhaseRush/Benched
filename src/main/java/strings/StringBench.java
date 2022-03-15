@@ -41,7 +41,6 @@ public class StringBench {
 
         Options opt = new OptionsBuilder()
                 .include(StringBench.class.getSimpleName())
-                .forks(1)
                 .build();
 
         new Runner(opt).run();
@@ -56,6 +55,7 @@ public class StringBench {
     public void stringConcat(Blackhole bh) {
         String res = "";
         for (int i = 0; i < N; i++) {
+            //noinspection StringConcatenationInLoop
             res += unit;
         }
         bh.consume(res);
@@ -88,6 +88,7 @@ public class StringBench {
     public void streamReduce(Blackhole bh) {
         bh.consume(IntStream.range(0, N).mapToObj(i -> unit).reduce(String::concat));
     }
+
     @Benchmark
     public void parallelStreamReduce(Blackhole bh) {
         bh.consume(IntStream.range(0, N).parallel().mapToObj(i -> unit).reduce(String::concat));
