@@ -14,33 +14,34 @@ import java.util.concurrent.TimeUnit;
 Ryzen 7 5800x DDR4 C18 1T
 Benchmark                    (N)  Mode  Cnt       Score      Error  Units
 CacheBench.columnMajorSum     10  avgt    5       0.039 ±    0.001  us/op
-CacheBench.columnMajorSum    100  avgt    5       3.154 ±    0.012  us/op
-CacheBench.columnMajorSum   1000  avgt    5     958.767 ±    7.110  us/op
-CacheBench.columnMajorSum  10000  avgt    5  596847.942 ± 9710.131  us/op
 CacheBench.rowMajorSum        10  avgt    5       0.022 ±    0.001  us/op
+
+CacheBench.columnMajorSum    100  avgt    5       3.154 ±    0.012  us/op
 CacheBench.rowMajorSum       100  avgt    5       2.070 ±    0.005  us/op
+
+CacheBench.columnMajorSum   1000  avgt    5     958.767 ±    7.110  us/op
 CacheBench.rowMajorSum      1000  avgt    5     208.441 ±    0.390  us/op
+
+CacheBench.columnMajorSum  10000  avgt    5  596847.942 ± 9710.131  us/op
 CacheBench.rowMajorSum     10000  avgt    5   31717.749 ±  899.836  us/op
 
- * Ryzen 5 3600 @ 4100Mhz, DDR4 3800MHz CL 16 1T
- * Benchmark                    (N)  Mode  Cnt     Score    Error  Units
- * CacheBench.columnMajorSum  10000  avgt    5  1245.935 ± 37.960  ms/op
- * CacheBench.rowMajorSum     10000  avgt    5    41.639 ±  3.543  ms/op
- * CacheBench.columnMajorSum   1000  avgt    5     1.341 ±  0.350  ms/op
- * CacheBench.rowMajorSum      1000  avgt    5     0.256 ±  0.008  ms/op
- *
+Ryzen 5 3600 @ 4100Mhz, DDR4 3800MHz CL 16 1T
+Benchmark                    (N)  Mode  Cnt     Score    Error  Units
+CacheBench.columnMajorSum     10  avgt    5    53.766 ±   1.654  ns/op
+CacheBench.rowMajorSum        10  avgt    5    31.054 ±   1.079  ns/op
 
- * CacheBench.columnMajorSum  100  avgt    5  4843.406 ± 575.563  ns/op
- * CacheBench.rowMajorSum     100  avgt    5  2468.049 ±  36.058  ns/op
- *
- * CacheBench.columnMajorSum   10  avgt    5  53.766 ± 1.654    ns/op
- * CacheBench.rowMajorSum      10  avgt    5  31.054 ± 1.079    ns/op
- *
- *
- *
- * Ryzen 5 3600 @ 4100Mhz, DDR4 2400MHz CL 16 2T
- * CacheBench.columnMajorSum  10000  avgt    5  1195.510 ± 124.247  ms/op
- * CacheBench.rowMajorSum     10000  avgt    5    52.250 ±   3.087  ms/op
+CacheBench.columnMajorSum    100  avgt    5  4843.406 ± 575.563  ns/op
+CacheBench.rowMajorSum       100  avgt    5  2468.049 ±  36.058  ns/op
+
+CacheBench.columnMajorSum   1000  avgt    5     1.341 ±  0.350  ms/op
+CacheBench.rowMajorSum      1000  avgt    5     0.256 ±  0.008  ms/op
+
+CacheBench.columnMajorSum  10000  avgt    5  1245.935 ± 37.960  ms/op
+CacheBench.rowMajorSum     10000  avgt    5    41.639 ±  3.543  ms/op
+
+Ryzen 5 3600 @ 4100Mhz, DDR4 2400MHz CL 16 2T
+CacheBench.columnMajorSum  10000  avgt    5  1195.510 ± 124.247  ms/op
+CacheBench.rowMajorSum     10000  avgt    5    52.250 ±   3.087  ms/op
  */
 public class CacheBench {
 
