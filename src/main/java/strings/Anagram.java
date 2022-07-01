@@ -7,6 +7,8 @@ import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @BenchmarkMode(Mode.AverageTime)
@@ -80,78 +82,80 @@ public class Anagram {
 
     }
 
-//    @Benchmark
-//    public boolean JayM1() {
-//        if (a.length() != b.length()) {
-//            return false;
-//        }
-//
-//        Map<String, Integer> smap = new HashMap<String, Integer>();//created two maps
-//        Map<String, Integer> tmap = new HashMap<String, Integer>();
-//
-//
-//        for (int i = 0; i < a.length(); i++) {
-//            smap.put(a.substring(i, i + 1), 0);
-//            tmap.put(b.substring(i, i + 1), 0);
-//        } // added all strings and value = 0
-//
-//
-//        for (int i = 0; i < a.length(); i++) {
-//
-//            smap.put(a.substring(i, i + 1), smap.get(a.substring(i, i + 1)) + 1);
-//            tmap.put(b.substring(i, i + 1), tmap.get(b.substring(i, i + 1)) + 1);
-//        } //went through every value and added in k, value + 1
-////        System.out.println(smap.toString());
-////        System.out.println(tmap.toString());
-//
-//        for (String key : smap.keySet()) {
-//            if (tmap.containsKey(key)) {
-//                if (!(tmap.get(key).equals(smap.get(key)))) {
-//                    return false;
-//                }
-//            }
-//            if (!(tmap.containsKey(key))) {
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
-//
-//    @Benchmark
-//    public boolean JayM1_nostring() {
-//        if (a.length() != b.length()) {
-//            return false;
-//        }
-//
-//        Map<Character, Integer> smap = new HashMap<>();//created two maps
-//        Map<Character, Integer> tmap = new HashMap<>();
-//
-//
-//        for (int i = 0; i < a.length(); i++) {
-//            smap.put(a.charAt(i), 0);
-//            tmap.put(b.charAt(i), 0);
-//        } // added all strings and value = 0
-//
-//
-//        for (int i = 0; i < a.length(); i++) {
-//
-//            smap.put(a.charAt(i), smap.get(a.charAt(i)) + 1);
-//            tmap.put(b.charAt(i), tmap.get(b.charAt(i)) + 1);
-//        } //went through every value and added in k, value + 1
-////        System.out.println(smap.toString());
-////        System.out.println(tmap.toString());
-//
-//        for (Character key : smap.keySet()) {
-//            if (tmap.containsKey(key)) {
-//                if (!(tmap.get(key).equals(smap.get(key)))) {
-//                    return false;
-//                }
-//            }
-//            if (!(tmap.containsKey(key))) {
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
+    @Benchmark
+    public boolean JayM1() {
+        if (a.length() != b.length()) {
+            return false;
+        }
+
+        Map<String, Integer> smap = new HashMap<String, Integer>();//created two maps
+        Map<String, Integer> tmap = new HashMap<String, Integer>();
+
+
+        for (int i = 0; i < a.length(); i++){
+            smap.put(a.substring(i, i + 1), 0);
+            tmap.put(b.substring(i, i + 1), 0);
+        } // added all strings and value = 0
+
+
+
+        for (int i = 0; i < a.length(); i++) {
+
+            smap.put(a.substring(i, i + 1), smap.get(a.substring(i, i + 1)) + 1);
+            tmap.put(b.substring(i, i + 1), tmap.get(b.substring(i, i + 1)) + 1);
+        } //went through every value and added in k, value + 1
+//        System.out.println(smap.toString());
+//        System.out.println(tmap.toString());
+
+        for (String key: smap.keySet()) {
+            if (tmap.containsKey(key)) {
+                if (!(tmap.get(key).equals(smap.get(key)))) {
+                    return false;
+                }
+            }
+            if (!(tmap.containsKey(key))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Benchmark
+    public boolean JayM1_nostring() {
+        if (a.length() != b.length()) {
+            return false;
+        }
+
+        Map<Character, Integer> smap = new HashMap<>();//created two maps
+        Map<Character, Integer> tmap = new HashMap<>();
+
+
+        for (int i = 0; i < a.length(); i++){
+            smap.put(a.charAt(i), 0);
+            tmap.put(b.charAt(i), 0);
+        } // added all strings and value = 0
+
+
+
+        for (int i = 0; i < a.length(); i++) {
+
+            smap.put(a.charAt(i), smap.get(a.charAt(i)) + 1);
+            tmap.put(b.charAt(i), tmap.get(b.charAt(i)) + 1);
+        } //went through every value and added in k, value + 1
+//        System.out.println(smap.toString());
+//        System.out.println(tmap.toString());
+
+        for (Character key: smap.keySet()) {
+            if (tmap.containsKey(key)) {
+                if (!(tmap.get(key).equals(smap.get(key)))) {
+                    return false;
+                }
+            }
+            if (!(tmap.containsKey(key))) {
+                return false;
+            }
+        }
+        return true;
+    }
 
 }
