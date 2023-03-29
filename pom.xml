@@ -80,14 +80,29 @@
         <dependency>
             <groupId>org.eclipse.collections</groupId>
             <artifactId>eclipse-collections-api</artifactId>
-            <version>10.4.0</version>
+            <version>11.1.0</version>
         </dependency>
 
         <dependency>
             <groupId>org.eclipse.collections</groupId>
             <artifactId>eclipse-collections</artifactId>
-            <version>10.4.0</version>
+            <version>11.1.0</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.neo4j/neo4j-primitive-collections -->
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j-primitive-collections</artifactId>
+            <version>3.4.18</version>
+        </dependency>
+
+
+        <!--        &lt;!&ndash; https://mvnrepository.com/artifact/gnu.trove/trove &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>gnu.trove</groupId>-->
+<!--            <artifactId>trove</artifactId>-->
+<!--            <version>3.0.3</version>-->
+<!--        </dependency>-->
 
     </dependencies>
 
