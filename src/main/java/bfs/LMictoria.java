@@ -30,7 +30,7 @@ public class LMictoria {
     public void run(LMazeState state, Blackhole bh) {
         int result = l_bfs(state.mat, state.N);
         assert result == state.answer;
-        System.out.printf("Result=%d, Answer=%d", result, state.answer);
+//        System.out.printf("Result=%d, Answer=%d", result, state.answer);
         bh.consume(result);
     }
 
