@@ -1,0 +1,37 @@
+[
+  {
+    "contributor": "given",
+    "input": {
+      "s": "abcabcbb"
+    },
+    "output": 3
+  },
+  {
+    "contributor": "given",
+    "input": {
+      "s": "bbbbb"
+    },
+    "output": 1
+  },
+  {
+    "contributor": "given",
+    "input": {
+      "s": "pwwkew"
+    },
+    "output": 3
+  },
+  {
+    "contributor": "blank",
+    "input": {
+      "s": ""
+    },
+    "output": 0
+  },
+  {
+    "contributor": "PhaseRush",
+    "input": {
+      "s": "dvdf"
+    },
+    "output": 3
+  }
+]
