@@ -14,11 +14,20 @@ The latest version of Windows 11 is always used. Once I get my homelab set up a 
 
 Current Setup:
 
-| Component |Model| Specs                                             |
-|-----------|---|---------------------------------------------------|
-| CPU       |AMD Ryzen R7 5800x| 4.8 GHz, FCLK 1900, UCLK 1900                     |
-| RAM       |G.Skill Trident Z Neo| 64 GB, Hynix M-die, DDR4 3800 MHz, 18 22 22 42 64 |
-| Drive     |WD SN750||
+| Component | Model                       | Specs       |
+|-----------|-----------------------------|-------------|
+| CPU       | Intel i7 13700k             | Stock       |
+| RAM       | T Create 2x 32Gb 6000 CL 34 | Default XMP |
+| Drive     | WD SN850x 2TB               |             |
+
+
+Setup used before 2023 12 01
+
+| Component | Model                 | Specs                                             |
+|-----------|-----------------------|---------------------------------------------------|
+| CPU       | AMD Ryzen R7 5800x    | 4.8 GHz, FCLK 1900, UCLK 1900                     |
+| RAM       | G.Skill Trident Z Neo | 64 GB, Hynix M-die, DDR4 3800 MHz, 18 22 22 42 64 |
+| Drive     | WD SN750              |                                                   |
 
 Setup used before 2020-11-15 \
 CPU: \
