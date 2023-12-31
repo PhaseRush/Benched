@@ -11,6 +11,20 @@ import java.util.concurrent.TimeUnit;
 @State(Scope.Benchmark)
 
 /*
+M1 Pro 8 core
+Benchmark                    (N)  Mode  Cnt       Score      Error  Units
+CacheBench.columnMajorSum     10  avgt    5       0.046 ±    0.001  us/op
+CacheBench.rowMajorSum        10  avgt    5       0.028 ±    0.001  us/op
+
+CacheBench.columnMajorSum    100  avgt    5       3.352 ±    0.005  us/op
+CacheBench.rowMajorSum       100  avgt    5       3.198 ±    0.003  us/op
+
+CacheBench.columnMajorSum   1000  avgt    5     917.940 ±    3.243  us/op
+CacheBench.rowMajorSum      1000  avgt    5     320.177 ±    0.545  us/op
+
+CacheBench.columnMajorSum  10000  avgt    5  457774.828 ± 1537.626  us/op
+CacheBench.rowMajorSum     10000  avgt    5   32750.609 ±   36.334  us/op
+
 Ryzen 7 5800x DDR4 C18 1T
 Benchmark                    (N)  Mode  Cnt       Score      Error  Units
 CacheBench.columnMajorSum     10  avgt    5       0.039 ±    0.001  us/op

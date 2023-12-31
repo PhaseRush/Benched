@@ -15,7 +15,7 @@ fun twoSum(nums: IntArray, target: Int): IntArray {
 
 fun main() {
     val tests: List<Case1> = Gson().fromJson(File("./src/main/java/leetcode/json/test_1.json").readText())
-    tests.forEach { case -> assert(twoSum(case.input.nums, case.input.target) == case.output) }
+    tests.forEach { case -> assert(twoSum(case.input.nums, case.input.target).contentEquals(case.output)) }
 }
 
 private data class Input1(
