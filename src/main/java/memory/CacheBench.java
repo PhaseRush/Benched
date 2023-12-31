@@ -11,6 +11,20 @@ import java.util.concurrent.TimeUnit;
 @State(Scope.Benchmark)
 
 /*
+13700k 6000mhz 34 44 44 84 128 480 2T
+Benchmark                    (N)  Mode  Cnt       Score       Error  Units
+CacheBench.columnMajorSum     10  avgt    5       0.029 ±     0.001  us/op
+CacheBench.rowMajorSum        10  avgt    5       0.018 ±     0.001  us/op
+
+CacheBench.columnMajorSum    100  avgt    5       2.820 ±     0.075  us/op
+CacheBench.rowMajorSum       100  avgt    5       1.903 ±     0.043  us/op
+
+CacheBench.columnMajorSum   1000  avgt    5     743.567 ±    12.221  us/op
+CacheBench.rowMajorSum      1000  avgt    5     191.222 ±     1.026  us/op
+
+CacheBench.columnMajorSum  10000  avgt    5  641226.098 ± 14037.398  us/op
+CacheBench.rowMajorSum     10000  avgt    5   36648.540 ±   225.435  us/op
+
 M1 Pro 8 core
 Benchmark                    (N)  Mode  Cnt       Score      Error  Units
 CacheBench.columnMajorSum     10  avgt    5       0.046 ±    0.001  us/op
