@@ -21,6 +21,19 @@ import java.util.stream.Stream;
 @Warmup(iterations = 3)
 @Measurement(iterations = 5)
 /*
+M1 Pro 8 core
+Benchmark                           (N)  Mode  Cnt        Score        Error  Units
+ArrayVsList2.array_listFor           25  avgt    5       69.982 ±      0.317  ns/op
+ArrayVsList2.array_loopWhile         25  avgt    5       70.111 ±      0.307  ns/op
+ArrayVsList2.array_replace           25  avgt    5       34.465 ±      0.058  ns/op
+ArrayVsList2.list_loopFor            25  avgt    5       84.873 ±      0.201  ns/op
+ArrayVsList2.list_loopWhile          25  avgt    5       77.040 ±      0.204  ns/op
+ArrayVsList2.list_replace            25  avgt    5       51.204 ±      0.089  ns/op
+ArrayVsList2.sum_even_loop_array     25  avgt    5       66.006 ±      1.193  ns/op
+ArrayVsList2.sum_even_loop_list      25  avgt    5       86.658 ±      0.825  ns/op
+ArrayVsList2.sum_even_stream_array   25  avgt    5  2615052.908 ± 130270.470  ns/op
+ArrayVsList2.sum_even_stream_list    25  avgt    5  2581911.157 ±  34747.176  ns/op
+
 Benchmark                              (N)  Mode  Cnt         Score        Error  Units
 CollectionBench.array_listFor           25  avgt    5       104.498 ±      1.904  ns/op
 CollectionBench.list_loopFor            25  avgt    5       162.450 ±      1.338  ns/op
